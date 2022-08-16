@@ -7,10 +7,13 @@ module.exports = {
     extend: {
       colors: {
         'green': '#568C6D',
+        'green-500': '#365945',
         'brown': '#A68C7C',
+        'brown-500': '#7d695c',
         'black': '#262626',
         'white': '#F2F2F2',
         'blue': '#5E8C7F',
+        'blue-500': '#43635a',
       },
       fontFamily: {
         'oleo': ['Oleo Script', ...defaultTheme.fontFamily.sans],
@@ -26,7 +29,15 @@ module.exports = {
       backgroundImage: {
         blob: "url('./img/blob.svg')",
         "blob-blue": "url('./img/blob-blue.svg')",
-      }
+        marbre : "url('./img/marbre.jpg')",
+      },
+      gridTemplateColumns: {
+        blog: "repeat(auto-fit, minmax(11rem, 1fr))",
+        "blog-md": "repeat(auto-fit, minmax(16rem, 1fr))",
+      },
+      borderWidth: {
+        '10': '10px',
+      },
     },
   },
   plugins: [],
