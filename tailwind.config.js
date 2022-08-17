@@ -15,6 +15,13 @@ module.exports = {
         'blue': '#5E8C7F',
         'blue-500': '#43635a',
       },
+      backgroundSize: {
+        '20': '20rem',
+        '15': '15rem',
+        '14': '14rem',
+        '10': '10rem',
+        '5': '5rem',
+      },
       fontFamily: {
         'oleo': ['Oleo Script', ...defaultTheme.fontFamily.sans],
         'fira': ['Fira Sans Condensed', ...defaultTheme.fontFamily.sans],
