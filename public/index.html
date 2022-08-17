@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="../dist/style.css">
     <title>Blog</title>
 </head>
-<body class="bg-marbre bg-no-repeat">
-    <header class="bg-black text-white py-10 border-b-8 border-brown">
-        <nav>
+<body class="bg-marbre bg-no-repeat bg-cover">
+    <header class="bg-black text-white py-10 border-b-8 border-brown flex items-center">
+        <a href="login.html" class="text-xl font-fira ml-20"><img src="img/logo.png" alt="logo" class="w-32"></a>
+
+        <nav class="justify-center flex-1">
             <ol class="flex justify-center space-x-20 text-xl font-fira">
                 <li>
                     <a href="" class="">Accueil</a>
@@ -24,28 +26,29 @@
             </ol>
         </nav>
 
+        <a href="login.html" class="text-xl font-fira mr-20">Se connecter</a>
     </header>
 
     <main>
-        <section class="flex justify-center">
-            <div class="py-14 text-center font-oleo text-4xl bg-blob bg-no-repeat my-20 w-1/4">
+        <section class="flex justify-center height">
+            <div class="py-16 text-center font-oleo bg-blob bg-no-repeat bg-center bg-10 my-20 text-2xl w-2/4 md:text-3xl md:bg-15 lg:bg-14 lg:text-4xl lg:bg-left-bottom lg:w-1/4">
                 <h1 class="">Connaissez-vous le développement web ?</h1>
             </div>
         </section>
 
         <section class="bg-gradient-to-r from-green to-green-500 skew-y-3 height space-y-20">
-            <div class="width text-white text-center font-oleo font-black text-4xl">
-                <h1 class="mx-52">Venez découvrir de nombreux articles qui vous racontent l'histoire du code</h1>
+            <div class="width text-white text-center font-oleo font-black text-2xl md:text-3xl lg:text-4xl">
+                <h1 class="md:mx-32 lg:mx-52">Venez découvrir de nombreux articles qui vous racontent l'histoire du code</h1>
             </div>
 
-            <div class="bg-white py-14 w-1/4 m-auto">
-                <p class="font-fira text-center text-2xl font-semibold">Nous commencerons par le PHP</p>
+            <div class="bg-white py-14 m-auto w-2/4 lg:w-1/4">
+                <p class="font-fira text-center font-semibold text-lg md:text-xl lg:text-2xl">Nous commencerons par le PHP</p>
             </div>
         </section>
 
 
         <section class="bg-gradient-to-r from-brown to-brown-500 skew-y-3 mt-10">
-            <div class="width height flex gap-x-10 -skew-y-3">
+            <div class="width height flex flew-wrap -skew-y-3 gap-x-5 lg:flex-nowrap lg:gap-x-10">
                 <article class="bg-black shadow-2xl height border-b-10 border-solid border-blue">
                     <div class="container-big">
                         <div class="mx-10 grid grid-cols-blog gap-x-10 gap-y-10 md:grid-cols-blog-md">
