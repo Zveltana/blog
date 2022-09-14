@@ -5,6 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+#menu-toggle:checked + #menu {
+  display: block;
+}
+
+#menu-toggle:checked + #connect {
+  display: block;
+}
+
 .width {
   @apply mx-8 md:mx-16 xl:mx-64;
 }
