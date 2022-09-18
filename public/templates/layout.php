@@ -10,7 +10,7 @@
 </head>
 <body class="bg-marbre bg-no-repeat bg-cover">
     <header class="bg-black text-white py-10 border-b-8 border-brown flex items-center">
-        <a href="login.html" class="text-xl font-fira ml-20"><img src="img/logo.png" alt="logo" class="w-32"></a>
+        <a href="index.php" class="text-xl font-fira ml-20"><img src="img/logo.png" alt="logo" class="w-32"></a>
 
         <div class="largeur flex flex-1 items-center justify-between">
             <div class="2xl:container 2xl:mx-auto flex flex-1 items-center justify-end lg:justify-center">

@@ -2,8 +2,8 @@
 
 <?php ob_start();?>
 <section class="flex justify-center height">
-    <div class="py-16 text-center font-oleo bg-blob bg-no-repeat bg-center bg-10 my-20 text-2xl w-2/4 md:text-3xl md:bg-15 lg:bg-14 lg:text-4xl lg:bg-left-bottom lg:w-1/4">
-        <h1 class="">Connaissez-vous le développement web ?</h1>
+    <div class="py-16 bg-blob bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-bottom lg:w-1/4">
+        <h1 class="title">Connaissez-vous le développement web ?</h1>
     </div>
 </section>
 
@@ -33,7 +33,7 @@
                         <p class="main-text">On va voir comment se présente le blog</p>
 
                         <div class="flex justify-center">
-                            <div class="button" title="Cliquez ici pour découvrir l'article">
+                            <div class="button-b" title="Cliquez ici pour découvrir l'article">
                                 <a href="post.html">
                                     <p class="button-brown">Lire l'article</p>
                                 </a>

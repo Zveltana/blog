@@ -3,11 +3,11 @@
 namespace Application\Controllers\User\Login;
 
 use Application\lib\Database\DatabaseConnection;
-use Application\Model\Comment\CommentRepository;
-use Application\Model\Login\UsersRepository;
+use Application\Model\Repository\Comment\CommentRepository;
+use Application\Model\Repository\Users\UsersRepository;
 
 require_once ('src/Lib/DatabaseConnection.php');
-require_once ('src/Model/user.php');
+require_once ('src/Model/User.php');
 
 class LoginConnection
 {

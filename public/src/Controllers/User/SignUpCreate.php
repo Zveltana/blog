@@ -1,7 +1,7 @@
 <?php
 namespace Application\Controllers\User\SignUp;
 
-require_once('src/Model/user.php');
+require_once('src/Model/User.php');
 require_once ('src/Lib/DatabaseConnection.php');
 
 use Application\Model\Comment\CommentRepository;

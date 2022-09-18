@@ -1,67 +1,9 @@
 <?php
 
-namespace Application\Model\Login;
+namespace Application\Model\Repository\Users;
 
 use Application\lib\Database\DatabaseConnection;
-use Application\Model\Post\Post;
-
-require_once ('src/Lib/DatabaseConnection.php');
-
-class Login
-{
-    private string $identifier;
-    private string $fullName;
-    private string $email;
-    private string $password;
-
-
-    public function getIdentifier(): string
-    {
-        return $this->identifier;
-    }
-
-
-    public function setIdentifier(string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
-
-
-    public function getFullName(): string
-    {
-        return $this->fullName;
-    }
-
-
-    public function setFullName(string $fullName): void
-    {
-        $this->fullName = $fullName;
-    }
-
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
-}
+use Application\Model\UserLogin\User;
 
 class UsersRepository {
     public DatabaseConnection $connection;
@@ -73,7 +15,7 @@ class UsersRepository {
 
         $users = [];
         while (($row = $statement->fetch())){
-            $user = new Login();
+            $user = new User();
             $user -> setFullName($row['full_name']);
             $user -> setEmail($row['email']);
             $user -> setPassword($row['password']);
@@ -85,10 +27,10 @@ class UsersRepository {
         return $users;
     }
 
-    public function getUser(string $email): ?Login
+    public function getUserByEmail(string $email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, full_name, email, password FROM users WHERE email = :email"
+            "SELECT * FROM users WHERE email = :email"
         );
         $statement->execute(['email'=>$email]);
 
@@ -97,7 +39,7 @@ class UsersRepository {
             return null;
         }
 
-        $user = new Login();
+        $user = new User();
         $user -> setIdentifier($row['id']);
         $user -> setFullName($row['full_name']);
         $user -> setEmail($row['email']);

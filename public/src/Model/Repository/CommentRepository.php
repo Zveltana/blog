@@ -1,19 +1,9 @@
 <?php
 
-namespace Application\Model\Comment;
+namespace Application\Model\Repository\Comment;
 
 use Application\lib\Database\DatabaseConnection;
-
-require_once ('src/Lib/DatabaseConnection.php');
-
-class Comment
-{
-    public string $identifier;
-    public string $author;
-    public string $frenchCreationDate;
-    public string $comment;
-    public string $post;
-}
+use Application\Model\Comment\Comment;
 
 class CommentRepository {
     public DatabaseConnection $connection;
@@ -82,3 +72,4 @@ class CommentRepository {
         return($affectedLines > 0);
     }
 }
+

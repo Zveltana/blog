@@ -1,9 +1,9 @@
 <?php
 namespace Application\Controllers\Homepage;
 
-require_once('src/Model/post.php');
+require_once('src/Model/Repository/PostRepository.php');
 
-use Application\Model\Post\PostRepository;
+use Application\Model\Repository\Post\PostRepository;
 use Application\lib\Database\DatabaseConnection;
 
 class Homepage

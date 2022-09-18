@@ -3,8 +3,8 @@
 namespace Application\Controllers\Post;
 
 require_once ('src/Lib/DatabaseConnection.php');
-require_once('src/Model/post.php');
-require_once ('src/Model/comment.php');
+require_once('src/Model/Post.php');
+require_once ('src/Model/Comment.php');
 
 use Application\Model\Post\PostRepository;
 use Application\Model\Comment\CommentRepository;
@@ -24,6 +24,6 @@ class Post
         $commentRepository->connection = new DatabaseConnection();
         $comments = $commentRepository->getComments($identifier);
 
-        require('templates/post.php');
+        require('templates/Post.php');
     }
 }

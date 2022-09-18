@@ -1,7 +1,7 @@
 <?php
 namespace Application\Controllers\Comment\Add;
 
-require_once('src/Model/comment.php');
+require_once('src/Model/Comment.php');
 require_once ('src/Lib/DatabaseConnection.php');
 
 use Application\Model\Comment\CommentRepository;

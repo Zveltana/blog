@@ -25,7 +25,11 @@
   @apply font-fira text-sm md:text-base xl:text-lg;
 }
 
-.button {
+.description {
+  @apply font-oleo text-xs md:text-sm xl:text-base;
+}
+
+.button-b {
   @apply mt-10 h-14 w-32 border-2 border-solid border-brown font-fira;
 }
 
@@ -33,12 +37,16 @@
   @apply h-full w-full flex justify-center items-center hover:bg-brown text-center text-sm md:text-base;
 }
 
-.button-b {
-  @apply mt-10 h-14 w-32 border-2 border-solid border-blue font-fira;
+.button-g {
+  @apply mt-10 h-14 w-32 border-2 border-solid border-green-500 font-fira;
 }
 
-.button-blue {
-  @apply h-full w-full flex justify-center items-center hover:bg-blue text-center text-sm md:text-base;
+.button-green {
+  @apply h-full w-full flex justify-center items-center hover:bg-green-500 hover:text-white text-center text-sm md:text-base;
+}
+
+.title {
+  @apply text-center font-oleo text-2xl md:text-3xl lg:text-4xl;
 }
 
 .subtitle {
