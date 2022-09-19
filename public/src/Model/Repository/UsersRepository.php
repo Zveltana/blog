@@ -32,6 +32,7 @@ class UsersRepository {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT * FROM users WHERE email = :email"
         );
+
         $statement->execute(['email'=>$email]);
 
         $row = $statement->fetch();

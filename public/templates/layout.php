@@ -1,4 +1,4 @@
-<?php use Application\Model\Login\UsersRepository; ?>
+<?php use Application\Model\Repository\Users\UsersRepository; ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,7 +35,7 @@
             </div>
 
             <?php if(isset($loggedUser)):?>
-                <p class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $loggedUser['full_name']?></p>
+                <p class="hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $loggedUser['email']?></p>
             <?php else: ?>
                 <div>
                     <a href="index.php?action=login" class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg">Se connecter</a>

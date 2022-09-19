@@ -57,7 +57,7 @@
                         <p class="main-text">On va voir comment se présente le blog</p>
 
                         <div class="flex justify-center">
-                            <div class="button" title="Cliquez ici pour découvrir l'article">
+                            <div class="button-b" title="Cliquez ici pour découvrir l'article">
                                 <a href="post.html">
                                     <p class="button-brown">Lire l'article</p>
                                 </a>
@@ -91,7 +91,7 @@
                         <p class="main-text">On va voir comment se présente le blog</p>
 
                         <div class="flex justify-center">
-                            <div class="button-b" title="Cliquez ici pour découvrir l'article">
+                            <div class="button-bl" title="Cliquez ici pour découvrir l'article">
                                 <a href="post.html">
                                     <p class="button-blue">Lire l'article</p>
                                 </a>
@@ -115,7 +115,7 @@
                         <p class="main-text">On va voir comment se présente le blog</p>
 
                         <div class="flex justify-center">
-                            <div class="button-b" title="Cliquez ici pour découvrir l'article">
+                            <div class="button-bl" title="Cliquez ici pour découvrir l'article">
                                 <a href="post.html">
                                     <p class="button-blue">Lire l'article</p>
                                 </a>

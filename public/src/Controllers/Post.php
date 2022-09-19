@@ -6,8 +6,8 @@ require_once ('src/Lib/DatabaseConnection.php');
 require_once('src/Model/Post.php');
 require_once ('src/Model/Comment.php');
 
-use Application\Model\Post\PostRepository;
-use Application\Model\Comment\CommentRepository;
+use Application\Model\Repository\Post\PostRepository;
+use Application\Model\Repository\Comment\CommentRepository;
 use Application\lib\Database\DatabaseConnection;
 
 class Post
