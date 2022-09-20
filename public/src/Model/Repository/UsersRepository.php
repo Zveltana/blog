@@ -41,10 +41,10 @@ class UsersRepository {
         }
 
         $user = new User();
-        $user -> setIdentifier($row['id']);
-        $user -> setFullName($row['full_name']);
-        $user -> setEmail($row['email']);
-        $user -> setPassword($row['password']);
+        $user->setIdentifier($row['id']);
+        $user->setFullName($row['full_name']);
+        $user->setEmail($row['email']);
+        $user->setPassword($row['password']);
 
         return $user;
     }

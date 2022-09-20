@@ -34,8 +34,8 @@
 
             </div>
 
-            <?php if(isset($loggedUser)):?>
-                <p class="hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $loggedUser['email']?></p>
+            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+                <p class="hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $_SESSION['LOGGED_USER'] ?></p>
             <?php else: ?>
                 <div>
                     <a href="index.php?action=login" class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg">Se connecter</a>
@@ -64,7 +64,7 @@
                 <hr>
 
                 <?php if(isset($loggedUser)):?>
-                    <p class="flex w-full flex-col items-center py-8 gap-y-4 hover:text-brown-500 font-fira text-xl"><?= $loggedUser['full_name']?></p>
+                    <p class="flex w-full flex-col items-center py-8 gap-y-4 hover:text-brown-500 font-fira text-xl"><?= $loggedUser['email']?></p>
                 <?php else: ?>
                     <div class="flex w-full flex-col items-center py-8 gap-y-4">
                         <a href="index.php?action=login&id=<?= htmlspecialchars($user->identifier)?>" class="hover:text-brown-500 font-fira text-xl">Se connecter</a>

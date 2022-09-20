@@ -2,10 +2,6 @@
 
 namespace Application\Model\UserLogin;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\Post\Post;
-use Application\Model\Repository\Users\UsersRepository;
-
 require_once ('src/Lib/DatabaseConnection.php');
 
 class User

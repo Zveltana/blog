@@ -3,7 +3,9 @@
 namespace Application\Model\Repository\Post;
 
 use Application\lib\Database\DatabaseConnection;
-use Application\Model\Post\Post;
+use Application\Model\PostView\Post;
+
+require_once ('src/Model/Post.php');
 
 class PostRepository {
     public DatabaseConnection $connection;

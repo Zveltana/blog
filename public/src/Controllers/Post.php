@@ -3,7 +3,7 @@
 namespace Application\Controllers\Post;
 
 require_once ('src/Lib/DatabaseConnection.php');
-require_once('src/Model/Post.php');
+require_once('src/Model/Repository/PostRepository.php');
 require_once ('src/Model/Comment.php');
 
 use Application\Model\Repository\Post\PostRepository;

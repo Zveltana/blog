@@ -47,11 +47,7 @@ try {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] === 'login') {
-
-            $input = $_POST;
-
-
-            (new LoginConnection())->execute($input);
+            (new LoginConnection())->execute();
         } else {
             throw new Exception('La page que vous recherchez n\'existe pas');
         }

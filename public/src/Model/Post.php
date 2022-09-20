@@ -1,11 +1,8 @@
 <?php
 
-namespace Application\Model\Post;
+namespace Application\Model\PostView;
 
 require_once ('src/Lib/DatabaseConnection.php');
-
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\Repository\Post\PostRepository;
 
 class Post {
     public string $title;
