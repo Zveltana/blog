@@ -10,7 +10,7 @@
         <div class="height width">
             <!-- si message d'erreur on l'affiche -->
             <?php if(isset($errorMessage)) : ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="main-text font-semibold text-brown mb-5" role="alert">
                     <?php echo $errorMessage; ?>
                 </div>
             <?php endif; ?>
@@ -20,7 +20,7 @@
                     <label for="email" class="form-label main-text">Email</label>
                     <input type="email" class="form-control main-text" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
                     <?php if (!empty($errors['email'])): ?>
-                        <span class="error"><?= $errors['email']?></span>
+                        <span class="error main-text text-brown font-semibold"><?= $errors['email']?></span>
                     <?php endif; ?>
                 </div>
                 <p id="email-help" class="text-green-500 description">L'email utilisé lors de la création du compte.</p>
@@ -30,7 +30,7 @@
                 <label for="password" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="password" name="password">
                 <?php if (!empty($errors['password'])): ?>
-                    <span class="error"><?= $errors['password']?></span>
+                    <span class="error main-text text-brown font-semibold"><?= $errors['password']?></span>
                 <?php endif; ?>
             </div>
 

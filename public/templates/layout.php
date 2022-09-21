@@ -35,7 +35,11 @@
             </div>
 
             <?php if(isset($_SESSION['LOGGED_USER'])):?>
-                <p class="hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $_SESSION['LOGGED_USER'] ?></p>
+                <div class="flex flex-col hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"
+                    <p><?= $_SESSION['LOGGED_USER'] ?></p>
+
+                    <a class="hover:text-brown-500" href="index.php?action=logout">Déconnexion</a>
+                 </div>
             <?php else: ?>
                 <div>
                     <a href="index.php?action=login" class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg">Se connecter</a>
@@ -63,11 +67,15 @@
 
                 <hr>
 
-                <?php if(isset($loggedUser)):?>
-                    <p class="flex w-full flex-col items-center py-8 gap-y-4 hover:text-brown-500 font-fira text-xl"><?= $loggedUser['email']?></p>
+                <?php if(isset($_SESSION['LOGGED_USER'])):?>
+                        <div class="flex flex-col text-sm font-fira mr-20 lg:text-base xl:text-lg"
+                        <p><?= $_SESSION['LOGGED_USER'] ?></p>
+
+                        <a class="hover:text-brown-500" href="index.php?action=logout">Déconnexion</a>
+                    </div>
                 <?php else: ?>
                     <div class="flex w-full flex-col items-center py-8 gap-y-4">
-                        <a href="index.php?action=login&id=<?= htmlspecialchars($user->identifier)?>" class="hover:text-brown-500 font-fira text-xl">Se connecter</a>
+                        <a href="index.php?action=login" class="hover:text-brown-500 font-fira text-xl">Se connecter</a>
 
                         <a href="index.php?action=signup" class="hover:text-brown-500 font-fira text-xl">S'inscrire</a>
                     </div>

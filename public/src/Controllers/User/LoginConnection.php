@@ -15,9 +15,7 @@ class LoginConnection
 {
     public function execute(): void
     {
-        var_dump($_SESSION);
         if(isset($_SESSION['loggedUser'])){
-            die('va mourri');
             header('Location: index.php');
         }
 
@@ -41,16 +39,14 @@ class LoginConnection
 
             if (count($errors) === 0) {
                 $user = $usersRepository->getUserByEmail($postData['email']);
+                $password_hash = password_hash($postData['password'], PASSWORD_DEFAULT);
 
-                if ($user !== null && $user->getPassword() === $postData['password']) {
+                if ($user !== null && password_verify($user->getPassword(), $password_hash) === true) {
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
 
                     header('Location: index.php');
                 } else {
-                    $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
-                        $postData['email'],
-                        $postData['password']
-                    );
+                    $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
                 }
             }
         }
