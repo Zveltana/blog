@@ -1,13 +1,12 @@
 <?php
 
-namespace Application\Model\Repository\Users;
+namespace Application\Model\Repository;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\UserLogin\User;
+use Application\Lib\DatabaseConnection;
+use Application\Model\User;
 
-require_once ('src/Model/User.php');
-
-class UsersRepository {
+class UsersRepository
+{
     public DatabaseConnection $connection;
 
     public function getUsers(): array {

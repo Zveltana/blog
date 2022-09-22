@@ -1,14 +1,10 @@
 <?php
 
-namespace Application\Controllers\Post;
+namespace Application\Controllers;
 
-require_once ('src/Lib/DatabaseConnection.php');
-require_once('src/Model/Repository/PostRepository.php');
-require_once ('src/Model/Comment.php');
-
-use Application\Model\Repository\Post\PostRepository;
-use Application\Model\Repository\Comment\CommentRepository;
-use Application\lib\Database\DatabaseConnection;
+use Application\Model\Repository\PostRepository;
+use Application\Model\Repository\CommentRepository;
+use Application\lib\DatabaseConnection;
 
 class Post
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Lib\Renderer;
+namespace Application\Lib;
 
 class Render
 {

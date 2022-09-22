@@ -1,11 +1,12 @@
 <?php
 
-namespace Application\Model\Repository\Comment;
+namespace Application\Model\Repository;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\Comment\Comment;
+use Application\Lib\DatabaseConnection;
+use Application\Model\Comment;
 
-class CommentRepository {
+class CommentRepository
+{
     public DatabaseConnection $connection;
 
     public function getComments(string $post): array {

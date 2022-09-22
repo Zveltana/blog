@@ -1,13 +1,12 @@
 <?php
 
-namespace Application\Model\Repository\Post;
+namespace Application\Model\Repository;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\PostView\Post;
+use Application\Lib\DatabaseConnection;
+use Application\Model\Post;
 
-require_once ('src/Model/Post.php');
-
-class PostRepository {
+class PostRepository
+{
     public DatabaseConnection $connection;
 
     public function getPosts(): array

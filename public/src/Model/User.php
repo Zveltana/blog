@@ -1,8 +1,8 @@
 <?php
 
-namespace Application\Model\UserLogin;
+namespace Application\Model;
 
-require_once ('src/Lib/DatabaseConnection.php');
+use Application\Lib\DatabaseConnection;
 
 class User
 {

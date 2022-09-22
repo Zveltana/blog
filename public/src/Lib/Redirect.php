@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Lib\Redirection;
+namespace Application\Lib;
 
 class Redirect
 {

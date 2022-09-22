@@ -1,10 +1,9 @@
 <?php
 
-namespace Application\Model\PostView;
+namespace Application\Model;
 
-require_once ('src/Lib/DatabaseConnection.php');
-
-class Post {
+class Post
+{
     public string $title;
     public string $content;
     public string $frenchCreationDate;

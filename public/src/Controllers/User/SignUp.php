@@ -1,13 +1,10 @@
 <?php
-namespace Application\Controllers\User\SignUp;
+namespace Application\Controllers\User;
 
-require_once ('src/Model/Repository/UsersRepository.php');
-require_once ('src/Lib/DatabaseConnection.php');
+use Application\Lib\DatabaseConnection;
+use Application\Model\Repository\UsersRepository;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\Repository\Users\UsersRepository;
-
-class SignUpCreate
+class SignUp
 {
     public function execute(): void
     {

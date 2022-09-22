@@ -1,17 +1,13 @@
 <?php
 
-namespace Application\Controllers\User\Login;
+namespace Application\Controllers\User;
 
-require_once ('src/Lib/DatabaseConnection.php');
-require_once ('src/Model/Repository/UsersRepository.php');
-require_once ('src/Lib/Redirect.php');
+use Application\Lib\DatabaseConnection;
+use Application\Model\Repository\UsersRepository;
+use Application\Lib\Redirect;
+use Application\Model\User;
 
-use Application\lib\Database\DatabaseConnection;
-use Application\Model\Repository\Users\UsersRepository;
-use Application\Lib\Redirection\Redirect;
-use Application\Model\UserLogin\User;
-
-class LoginConnection
+class Login
 {
     public function execute(): void
     {

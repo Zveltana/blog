@@ -1,20 +1,14 @@
 <?php session_start();
 
-require_once('src/Controllers/Comment/AddComment.php');
-require_once('src/Controllers/Comment/EditComment.php');
-require_once('src/Controllers/Homepage.php');
-require_once('src/Controllers/Post.php');
-require_once('src/Controllers/User/LoginConnection.php');
-require_once('src/Controllers/User/SignUpCreate.php');
-require_once('src/Lib/Redirect.php');
+require ('vendor/autoload.php');
 
-use Application\Controllers\Comment\Add\AddComment;
-use Application\Controllers\Comment\Update\EditComment;
-use Application\Controllers\Homepage\Homepage;
-use Application\Controllers\Post\Post;
-use Application\Controllers\User\SignUp\SignUpCreate;
-use Application\Controllers\User\Login\LoginConnection;
-use Application\Lib\Redirection\Redirect;
+use Application\Controllers\Comment\AddComment;
+use Application\Controllers\Comment\EditComment;
+use Application\Controllers\Homepage;
+use Application\Controllers\Post;
+use Application\Controllers\User\SignUp;
+use Application\Controllers\User\Login;
+use Application\Lib\Redirect;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -49,9 +43,9 @@ try {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] === 'login') {
-            (new LoginConnection())->execute();
+            (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {
-            (new SignUpCreate())->execute();
+            (new SignUp())->execute();
         } elseif ($_GET['action'] === 'logout') {
             (new Redirect())->execute( 'LogoutConnection.php');
         } else {
