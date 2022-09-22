@@ -5,6 +5,8 @@ namespace Application\Model\Repository\Users;
 use Application\lib\Database\DatabaseConnection;
 use Application\Model\UserLogin\User;
 
+require_once ('src/Model/User.php');
+
 class UsersRepository {
     public DatabaseConnection $connection;
 
@@ -49,13 +51,17 @@ class UsersRepository {
         return $user;
     }
 
-    public function createUser (string $full_name, string $email, string $password): bool {
-        $statement = $this->connection->getConnection()->prepare("
-        INSERT INTO users(id, full_name, email, password) VALUES(?, ?, ?, ?)
-        ");
+    public function createUser (string $fullName, string $email, string $password): bool {
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO users(full_name, email, password) VALUES(:fullName, :email, :password)"
+        );
 
-        $affectedLines = $statement->execute([$full_name, $email, $password]);
+        $statement->execute([
+            'fullName' => $fullName,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
 
-        return ($affectedLines > 0);
+        return true;
     }
 }

@@ -50,6 +50,8 @@ try {
             }
         } elseif ($_GET['action'] === 'login') {
             (new LoginConnection())->execute();
+        } elseif ($_GET['action'] === 'signup') {
+            (new SignUpCreate())->execute();
         } elseif ($_GET['action'] === 'logout') {
             (new Redirect())->execute( 'LogoutConnection.php');
         } else {

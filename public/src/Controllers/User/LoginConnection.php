@@ -39,9 +39,8 @@ class LoginConnection
 
             if (count($errors) === 0) {
                 $user = $usersRepository->getUserByEmail($postData['email']);
-                $password_hash = password_hash($postData['password'], PASSWORD_DEFAULT);
 
-                if ($user !== null && password_verify($user->getPassword(), $password_hash) === true) {
+                if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
 
                     header('Location: index.php');
