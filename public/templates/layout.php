@@ -16,11 +16,13 @@
             <div class="2xl:container 2xl:mx-auto flex flex-1 items-center justify-end lg:justify-center">
                 <nav>
                     <ol class="hidden list-none txtshadow gap-x-7 font-fira text-sm text-white lg:flex lg:text-base xl:text-lg">
-                        <li>Accueil</li>
-
-                        <li>
-                            <a href="blog.html" class="hover:text-brown-500">Blog</a>
-                        </li>
+                        <?php if (isset($_GET['action'])): ?>
+                            <li class="hover:text-brown-500">
+                                <a href="index.php">Accueil</a>
+                            </li>
+                        <?php else:?>
+                        <li class="text-brown-500">Accueil</li>
+                        <?php endif;?>
 
                         <li>
                             <a href="contact.html" class="hover:text-brown-500">Contact</a>
@@ -36,9 +38,9 @@
 
             <?php if(isset($_SESSION['LOGGED_USER'])):?>
                 <div class="flex flex-col hidden lg:block text-sm font-fira mr-20 lg:text-base xl:text-lg"
-                    <p><?= $_SESSION['LOGGED_USER'] ?></p>
+                    <p class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg"><?= $_SESSION['LOGGED_USER'] ?></p>
 
-                    <a class="hover:text-brown-500" href="index.php?action=logout">Déconnexion</a>
+                    <a class="hidden lg:block hover:text-brown-500 text-sm font-fira mr-20 lg:text-base xl:text-lg" href="index.php?action=logout">Déconnexion</a>
                  </div>
             <?php else: ?>
                 <div>
@@ -53,11 +55,13 @@
             <div class="absolute top-14 right-0 hidden w-2/4 bg-black border-b-8 border-brown mr-20" id="menu">
                 <nav>
                     <ol class="flex w-full list-none flex-col font-fira text-white gap-y-4 py-8 text-center text-xl">
-                        <li>Accueil</li>
-
-                        <li>
-                            <a href="blog.html" class="hover:text-brown-500">Blog</a>
-                        </li>
+                        <?php if (isset($_GET['action'])): ?>
+                            <li class="hover:text-brown-500">
+                                <a href="index.php">Accueil</a>
+                            </li>
+                        <?php else:?>
+                            <li class="text-brown-500">Accueil</li>
+                        <?php endif;?>
 
                         <li>
                             <a href="contact.html" class="hover:text-brown-500">Contact</a>
@@ -68,10 +72,10 @@
                 <hr>
 
                 <?php if(isset($_SESSION['LOGGED_USER'])):?>
-                        <div class="flex flex-col text-sm font-fira mr-20 lg:text-base xl:text-lg"
-                        <p><?= $_SESSION['LOGGED_USER'] ?></p>
+                    <div class="flex w-full flex-col items-center py-8 gap-y-4"
+                        <p class="hover:text-brown-500 font-fira text-xl"><?= $_SESSION['LOGGED_USER'] ?></p>
 
-                        <a class="hover:text-brown-500" href="index.php?action=logout">Déconnexion</a>
+                        <a class="hover:text-brown-500 font-fira text-xl" href="index.php?action=logout">Déconnexion</a>
                     </div>
                 <?php else: ?>
                     <div class="flex w-full flex-col items-center py-8 gap-y-4">
