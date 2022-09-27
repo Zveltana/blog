@@ -36,6 +36,7 @@ module.exports = {
       backgroundImage: {
         blob: "url('./img/blob.svg')",
         "blob-blue": "url('./img/blob-blue.svg')",
+        "blob-brown": "url('./img/blob-brown.svg')",
         marbre : "url('./img/marbre.jpg')",
       },
       gridTemplateColumns: {

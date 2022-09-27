@@ -1,5 +1,3 @@
-<?php use Application\Model\Repository\Users\UsersRepository; ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>

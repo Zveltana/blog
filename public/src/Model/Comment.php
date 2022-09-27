@@ -8,5 +8,5 @@ class Comment
     public string $author;
     public string $frenchCreationDate;
     public string $comment;
-    public string $post;
+    public string $postId;
 }

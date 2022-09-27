@@ -11,7 +11,7 @@ class CommentRepository
 
     public function getComments(string $post): array {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, Comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh/%imin/%ss') AS french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
+            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
         );
 
         $statement->execute([$post]);
@@ -21,9 +21,9 @@ class CommentRepository
             $comment = new Comment();
             $comment -> author = $row['author'];
             $comment -> frenchCreationDate = $row['french_creation_date'];
-            $comment -> comment = $row['Comment'];
+            $comment -> comment = $row['comment'];
             $comment -> identifier = $row['id'];
-            $comment -> post = $row['post_id'];
+            $comment -> postId = $row['post_id'];
 
             $comments[] = $comment;
         }
@@ -34,7 +34,7 @@ class CommentRepository
     public function getComment(string $identifier): ?Comment
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, Comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, post_id FROM comments WHERE id = ?"
+            "SELECT id, author, Comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE id = ?"
         );
         $statement->execute([$identifier]);
 
@@ -47,8 +47,8 @@ class CommentRepository
         $comment->identifier = $row['id'];
         $comment->author = $row['author'];
         $comment->frenchCreationDate = $row['french_creation_date'];
-        $comment->comment = $row['Comment'];
-        $comment->post = $row['post_id'];
+        $comment->comment = $row['comment'];
+        $comment->postId = $row['post_id'];
 
         return $comment;
     }

@@ -43,7 +43,7 @@ class SignUp
             if (count($errors) === 0 && $user === null) {
                 $createUser = $usersRepository->createUser($postData['fullName'], $postData['email'], $postData['password']);
 
-                $_SESSION['LOGGED_USER'] = $postData['fullName'];
+                $_SESSION['LOGGED_USER_fullName'] = $postData['fullName'];
 
                 header('Location: index.php');
             }

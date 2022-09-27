@@ -2,30 +2,43 @@
 namespace Application\Controllers\Comment;
 
 use Application\Model\Repository\CommentRepository;
-use Application\lib\DatabaseConnection;
+use Application\Lib\DatabaseConnection;
+use Application\Model\Repository\UsersRepository;
 
 class AddComment
 {
     public function execute(string $post, array $input)
     {
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
+
         $author = null;
         $comment = null;
 
-        if (!empty($input['author']) && !empty($input['Comment'])) {
+        $errors = [];
+
+        if (!empty($input['author'])) {
             $author = $input['author'];
-            $comment = $input['Comment'];
         } else {
-            throw new \Exception('Les données du formulaire sont invalide');
+            $errors['author'] = 'Veuillez remplir ce champ.';
         }
 
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
-        $success = $commentRepository->createComment($post, $author, $comment);
-
-        if (!$success) {
-            throw new \Exception('Impossible d\'ajouter le commentaire');
+        if (!empty($input['comment'])) {
+            $comment = $input['comment'];
         } else {
-            header('Location: index.php?action=post&id=' . $post);
+            $errors['comment'] = 'Veuillez remplir ce champ.';
         }
+
+        if (count($errors) === 0) {
+            $success = $commentRepository->createComment($post, $author, $comment);
+
+            if (!$success) {
+                $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
+            } else {
+                header('Location: index.php?action=post&id=' . $post);
+            }
+        }
+
+        require('templates/post.php');
     }
 }

@@ -6,9 +6,11 @@ use Application\Controllers\Comment\AddComment;
 use Application\Controllers\Comment\EditComment;
 use Application\Controllers\Homepage;
 use Application\Controllers\Post;
+use Application\Controllers\Category;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
 use Application\Lib\Redirect;
+use Application\Controllers\User\Logout;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -17,6 +19,14 @@ try {
                 $identifier = $_GET['id'];
 
                 (new Post())->execute($identifier);
+            } else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        } elseif ($_GET['action'] === 'category') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $identifier = $_GET['id'];
+
+                (new Category())->execute($identifier);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -47,7 +57,7 @@ try {
         } elseif ($_GET['action'] === 'signup') {
             (new SignUp())->execute();
         } elseif ($_GET['action'] === 'logout') {
-            (new Redirect())->execute( 'LogoutConnection.php');
+            (new Logout())->execute();
         } else {
             throw new Exception('La page que vous recherchez n\'existe pas');
         }

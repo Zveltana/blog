@@ -4,7 +4,7 @@ namespace Application\Controllers;
 
 use Application\Model\Repository\PostRepository;
 use Application\Model\Repository\CommentRepository;
-use Application\lib\DatabaseConnection;
+use Application\Lib\DatabaseConnection;
 
 class Post
 {
@@ -20,6 +20,6 @@ class Post
         $commentRepository->connection = new DatabaseConnection();
         $comments = $commentRepository->getComments($identifier);
 
-        require('templates/Post.php');
+        require('templates/post.php');
     }
 }

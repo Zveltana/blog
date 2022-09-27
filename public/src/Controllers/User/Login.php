@@ -38,6 +38,8 @@ class Login
 
                 if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
+                    $_SESSION['LOGGED_USER_id'] = $user->getIdentifier();
+
 
                     header('Location: index.php');
                 } else {
