@@ -10,4 +10,5 @@ class Post
     public string $frenchCreationDate;
     public string $identifier;
     public string $categoryId;
+    public string $author;
 }

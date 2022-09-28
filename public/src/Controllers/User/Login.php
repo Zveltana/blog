@@ -17,8 +17,7 @@ class Login
 
         $connection = new DatabaseConnection();
 
-        $usersRepository = new UsersRepository();
-        $usersRepository->connection = new DatabaseConnection();
+        $usersRepository = new UsersRepository($connection);
 
         $errors = [];
 
@@ -38,7 +37,7 @@ class Login
 
                 if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
-                    $_SESSION['LOGGED_USER_id'] = $user->getIdentifier();
+                    $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
 
 
                     header('Location: index.php');

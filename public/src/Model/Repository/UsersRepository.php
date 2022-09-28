@@ -7,7 +7,12 @@ use Application\Model\User;
 
 class UsersRepository
 {
-    public DatabaseConnection $connection;
+    private DatabaseConnection $connection;
+
+    public function __construct(DatabaseConnection $connection)
+    {
+        $this->connection = $connection;
+    }
 
     public function getUsers(): array {
         $statement = $this->connection->getConnection()->prepare(
@@ -35,6 +40,28 @@ class UsersRepository
         );
 
         $statement->execute(['email'=>$email]);
+
+        $row = $statement->fetch();
+        if ($row === false) {
+            return null;
+        }
+
+        $user = new User();
+        $user->setIdentifier($row['id']);
+        $user->setFullName($row['full_name']);
+        $user->setEmail($row['email']);
+        $user->setPassword($row['password']);
+
+        return $user;
+    }
+
+    public function getUserById(int $id): ?User
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM users WHERE id = :id"
+        );
+
+        $statement->execute(['id' => $id]);
 
         $row = $statement->fetch();
         if ($row === false) {

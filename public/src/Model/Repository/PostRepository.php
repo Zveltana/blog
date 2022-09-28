@@ -12,7 +12,7 @@ class PostRepository
     public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, description, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+            "SELECT id, title, description, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id, user_id FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
         );
 
         $posts = [];
@@ -24,6 +24,7 @@ class PostRepository
             $post -> frenchCreationDate = $row['french_creation_date'];
             $post -> identifier = $row['id'];
             $post -> categoryId = $row['category_id'];
+            $post -> author = $row['user_id'];
 
             $posts[] = $post;
         }
@@ -34,7 +35,7 @@ class PostRepository
     public function getPost(string $identifier): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, description, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id FROM posts WHERE id = ?"
+            "SELECT id, title, description, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id, user_id FROM posts WHERE id = ?"
         );
 
 
@@ -48,6 +49,7 @@ class PostRepository
         $post -> frenchCreationDate = $row['french_creation_date'];
         $post -> identifier = $row['id'];
         $post -> categoryId = $row['category_id'];
+        $post -> author = $row['user_id'];
 
         return $post;
     }
