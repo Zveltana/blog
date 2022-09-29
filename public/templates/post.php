@@ -3,7 +3,7 @@
 ob_start(); ?>
 
 <div class="height width space-y-10">
-    <p><a href="index.php?action=posts" class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> hover:text-green-500">Retour aux différents articles</a></p>
+    <p><a href="index.php?action=posts" class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> hover:text-brown-500">Retour aux différents articles</a></p>
 
     <section class="flex justify-center">
         <div class="py-16 <?php if($category->name === 'PHP'):?>bg-blob-brown<?php else: ?>bg-blob-blue <?php endif; ?> bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-top lg:w-2/5">

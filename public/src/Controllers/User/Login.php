@@ -11,7 +11,7 @@ class Login
 {
     public function execute(): void
     {
-        if(isset($_SESSION['loggedUser'])){
+        if(isset($_SESSION['LOGGED_USER'])){
             header('Location: index.php');
         }
 
@@ -35,14 +35,15 @@ class Login
             if (count($errors) === 0) {
                 $user = $usersRepository->getUserByEmail($postData['email']);
 
+                $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
+
                 if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
                     $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
+                    $_SESSION['LOGGED_USER_IS_ADMIN'] = $user->getIsAdmin();
 
 
                     header('Location: index.php');
-                } else {
-                    $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
                 }
             }
         }

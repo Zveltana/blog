@@ -18,13 +18,13 @@ class PostRepository
         $posts = [];
         while (($row = $statement->fetch())) {
             $post = new Post();
-            $post -> title = $row['title'];
-            $post -> description = $row['description'];
-            $post -> content = $row['content'];
-            $post -> frenchCreationDate = $row['french_creation_date'];
-            $post -> identifier = $row['id'];
-            $post -> categoryId = $row['category_id'];
-            $post -> author = $row['user_id'];
+            $post->title = $row['title'];
+            $post->description = $row['description'];
+            $post->content = $row['content'];
+            $post->frenchCreationDate = $row['french_creation_date'];
+            $post->identifier = $row['id'];
+            $post->categoryId = $row['category_id'];
+            $post->author = $row['user_id'];
 
             $posts[] = $post;
         }
@@ -43,13 +43,13 @@ class PostRepository
 
         $row = $statement->fetch();
         $post = new Post();
-        $post -> title = $row['title'];
-        $post -> description = $row['description'];
-        $post -> content = $row['content'];
-        $post -> frenchCreationDate = $row['french_creation_date'];
-        $post -> identifier = $row['id'];
-        $post -> categoryId = $row['category_id'];
-        $post -> author = $row['user_id'];
+        $post->title = $row['title'];
+        $post->description = $row['description'];
+        $post->content = $row['content'];
+        $post->frenchCreationDate = $row['french_creation_date'];
+        $post->identifier = $row['id'];
+        $post->categoryId = $row['category_id'];
+        $post->author = $row['user_id'];
 
         return $post;
     }

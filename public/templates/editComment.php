@@ -7,7 +7,7 @@ ob_start();
 
 <p><a href="index.php?action=post&id=<?= $comment->post ?>">Retour au billet</a> </p>
 
-<h1>Modifier le commentaire d'<?= htmlspecialchars($comment -> author)?></h1>
+<h1>Modifier le commentaire d'<?= htmlspecialchars($comment->author)?></h1>
 
 <form action="index.php?action=editComment&id=<?= htmlspecialchars($comment->identifier)?>" method="post">
     <div>

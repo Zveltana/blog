@@ -28,12 +28,12 @@ class CommentRepository
             $author = $this->usersRepository->getUserById($row['user_id']);
 
             $comment = new Comment();
-            $comment -> title = $row['title'];
-            $comment -> author = $author;
-            $comment -> frenchCreationDate = $row['french_creation_date'];
-            $comment -> comment = $row['comment'];
-            $comment -> identifier = $row['id'];
-            $comment -> postId = $row['post_id'];
+            $comment->title = $row['title'];
+            $comment->author = $author;
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->comment = $row['comment'];
+            $comment->identifier = $row['id'];
+            $comment->postId = $row['post_id'];
 
             $comments[] = $comment;
         }

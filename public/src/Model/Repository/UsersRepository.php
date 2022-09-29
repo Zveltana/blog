@@ -15,17 +15,18 @@ class UsersRepository
     }
 
     public function getUsers(): array {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, full_name, password, email FROM users"
+        $statement = $this->connection->getConnection()->query(
+            "SELECT * FROM users"
         );
 
         $users = [];
         while (($row = $statement->fetch())){
             $user = new User();
-            $user -> setFullName($row['full_name']);
-            $user -> setEmail($row['email']);
-            $user -> setPassword($row['password']);
-            $user -> setIdentifier($row['id']);
+            $user->setFullName($row['full_name']);
+            $user->setEmail($row['email']);
+            $user->setPassword($row['password']);
+            $user->setIdentifier($row['id']);
+            $user->setIsAdmin($row['is_admin']);
 
             $users[] = $user;
         }
@@ -51,6 +52,7 @@ class UsersRepository
         $user->setFullName($row['full_name']);
         $user->setEmail($row['email']);
         $user->setPassword($row['password']);
+        $user->setIsAdmin($row['is_admin']);
 
         return $user;
     }
@@ -73,6 +75,7 @@ class UsersRepository
         $user->setFullName($row['full_name']);
         $user->setEmail($row['email']);
         $user->setPassword($row['password']);
+        $user->setIsAdmin($row['is_admin']);
 
         return $user;
     }

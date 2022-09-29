@@ -18,8 +18,8 @@ class CategoryRepository
         $categories = [];
         while (($row = $statement->fetch())) {
             $category = new Category();
-            $category -> name = $row['name'];
-            $category -> identifier = $row['id'];
+            $category->name = $row['name'];
+            $category->identifier = $row['id'];
 
             $categories[] = $category;
         }
@@ -37,8 +37,8 @@ class CategoryRepository
 
         $row = $statement->fetch();
         $category = new Category();
-        $category -> name = $row['name'];
-        $category -> identifier = $row['id'];
+        $category->name = $row['name'];
+        $category->identifier = $row['id'];
 
         return $category;
     }
@@ -57,8 +57,8 @@ class CategoryRepository
         }
 
         $category = new Category();
-        $category -> name = $row['name'];
-        $category -> identifier = $row['id'];
+        $category->name = $row['name'];
+        $category->identifier = $row['id'];
 
         return $category;
     }

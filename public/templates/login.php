@@ -4,7 +4,7 @@
 <section class="width height">
     <h1 class="title mb-20">Connectez-Vous au Blog pour pouvoir créer ou modifier des articles</h1>
 
-    <?php if(!isset($_SESSION['loggedUser'])): ?>
+    <?php if(!isset($_SESSION['LOGGED_USER'])): ?>
 
     <form action="" method="post" class="bg-white space-y-5 border-solid border-4 border-brown rounded-2xl">
         <div class="height width">

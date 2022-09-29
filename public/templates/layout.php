@@ -123,17 +123,39 @@
     <footer class="bg-black text-white main-text text-center">
         <div class="py-20 space-y-10">
             <ol class="flex space-x-10 justify-center">
-                <li><a href="">
-                        Accueil</a>
-                </li>
+                <?php if (isset($_GET['action'])): ?>
+                    <li class="hover:text-brown-500">
+                        <a href="index.php">Accueil</a>
+                    </li>
+                <?php else:?>
+                    <li class="text-brown-500">Accueil</li>
+                <?php endif;?>
 
-                <li><a href="">
-                        Blog</a>
-                </li>
+                <?php if (isset($_GET['action']) && $_GET['action'] === 'posts'): ?>
+                    <li class="text-brown-500">Blog</li>
+                <?php else:?>
+                    <li>
+                        <a href="index.php?action=posts" class="hover:text-brown-500">Blog</a>
+                    </li>
+                <?php endif;?>
 
-                <li><a href="">
-                        Contact</a>
-                </li>
+                <?php if (isset($_GET['action']) && $_GET['action'] === 'contact'): ?>
+                    <li class="text-brown-500">Contact</li>
+                <?php else:?>
+                    <li>
+                        <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                    </li>
+                <?php endif;?>
+
+                <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true):?>
+                    <?php if (isset($_GET['action']) && $_GET['action'] === 'dashboard'): ?>
+                        <li class="text-brown-500">Tableau de bord</li>
+                    <?php else:?>
+                        <li>
+                            <a href="index.php?action=dashboard" class="hover:text-brown-500">Tableau de bord</a>
+                        </li>
+                    <?php endif;?>
+                <?php endif; ?>
             </ol>
 
             <p>Copyright © Blog 2022</p>
