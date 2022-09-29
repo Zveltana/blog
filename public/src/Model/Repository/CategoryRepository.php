@@ -42,4 +42,24 @@ class CategoryRepository
 
         return $category;
     }
+
+    public function getCategoryById(int $id): ?Category
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, name FROM categories WHERE id = :id"
+        );
+
+        $statement->execute(['id' => $id]);
+
+        $row = $statement->fetch();
+        if ($row === false) {
+            return null;
+        }
+
+        $category = new Category();
+        $category -> name = $row['name'];
+        $category -> identifier = $row['id'];
+
+        return $category;
+    }
 }

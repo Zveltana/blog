@@ -14,8 +14,7 @@ class SignUp
 
         $connection = new DatabaseConnection();
 
-        $usersRepository = new UsersRepository();
-        $usersRepository->connection = new DatabaseConnection();
+        $usersRepository = new UsersRepository($connection);
 
         $errors = [];
 

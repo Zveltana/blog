@@ -1,98 +1,48 @@
 <?php $title = 'Blog'; ?>
 
 <?php ob_start();?>
-<section class="flex justify-center height">
-    <div class="py-16 bg-blob bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-bottom lg:w-1/4">
-        <h1 class="title">Connaissez-vous le développement web ?</h1>
+<section class="height width">
+    <h1 class="title pb-20">Bienvenue sur le Blog d'Amélia MASSOT</h1>
+
+    <div class="flex flex-col gap-y-10 items-center lg:gap-y-0 lg:gap-x-20 lg:flex-row lg:flex-nowrap">
+        <div class="space-y-10">
+            <h2 class="subtitle">Laissez moi me présenter en quelques lignes.</h2>
+
+            <p class="main-text text-justify">Je suis une développeuse en alternance depuis maintenant un an dans l'entreprise
+                AKAWAKA.
+                J'ai un parcour de graphiste/web Designer ce qui me permet aujourd'hui,
+                en plus de ma formation de développeuse de concevoir des sites de A à Z, du visuel, de l'intégration
+                jusqu'au back. J'ai crée ce blog pour vous permettre de
+                découvrir en même temps que moi les recoins du développement web. J'espère que les articles vous
+                plairons et
+                n'hésitez pas à me contacter sur mes différents réseaux sociaux.</p>
+
+            <div class="flex w-14 flex-wrap justify-around md:w-24">
+                <a href="https://www.linkedin.com/in/am%C3%A9lia-massot-d%C3%A9veloppement-communication-digital-web/" target="_blank" class="justify-around">
+                    <img src="img/linkedin.svg"
+                         alt="icone linkedin"
+                         title="Logo Linkedin"
+                         class="w-6 md:w-8 xl:w-10"/>
+                </a>
+
+                <a href="https://twitter.com/Amel_CSGO" target="_blank" class="justify-around">
+                    <img src="img/twitter.svg"
+                         alt="icone twitter"
+                         title="Logo Twitter"
+                         class="w-6 md:w-8 xl:w-10 bg-brown rounded-full"/>
+                </a>
+            </div>
+        </div>
+
+        <img src="img/amelia.jpg" alt="photo d'Amélia MASSOT" class="rounded-full border-4 border-brown object-cover w-2/5">
     </div>
-</section>
 
-<section class="bg-gradient-to-r from-green to-green-500 skew-y-3 height space-y-20">
-    <div class="width text-white text-center font-oleo font-black text-2xl md:text-3xl lg:text-4xl">
-        <h1 class="md:mx-32 lg:mx-52">Venez découvrir de nombreux articles qui vous racontent l'histoire du code</h1>
-    </div>
-
-    <div class="bg-white py-14 m-auto w-2/4 lg:w-1/4">
-        <p class="font-fira text-center font-semibold text-lg md:text-xl lg:text-2xl">Nous commencerons par le PHP</p>
-    </div>
-</section>
-
-
-<section class="bg-gradient-to-r from-brown to-brown-500 skew-y-3 mt-10">
-    <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
-        <?php foreach ($categories as $category) { ?>
-            <?php if ($category -> name === 'PHP' ):?>
-                <?php foreach ($posts as $post){ ?>
-                    <?php if ($post-> categoryId === $category -> identifier ):?>
-                        <article class="bg-black shadow-2xl height border-b-10 border-solid border-blue w-2/4 lg:w-1/4">
-                        <div class="container-big">
-                            <div class="mx-10 grid grid-cols-blog gap-x-10 gap-y-10 md:grid-cols-blog-md">
-                                <div class="space-y-5 flex-1 text-white">
-                                    <p class="text-brown"><?= htmlspecialchars($post -> frenchCreationDate)?></p>
-
-                                    <img src="./img/blog-dev.jpg" alt="" class="w-64">
-
-                                    <h1 class="subtitle"><?= htmlspecialchars($post -> title)?></h1>
-
-                                    <p class="main-text"><?= htmlspecialchars($post -> description)?></p>
-
-                                    <div class="flex justify-center">
-                                        <div class="button-b" title="Cliquez ici pour découvrir l'article">
-                                            <a href="index.php?action=post&id=<?= urlencode($post -> identifier) ?>">
-                                                <p class="button-brown">Lire l'article</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <?php endif; ?>
-                <?php } ?>
-            <?php endif; ?>
-        <?php } ?>
-    </div>
-</section>
-
-<section class="bg-marbre skew-y-3 height">
-    <div class="bg-blue py-14 m-auto w-2/4 lg:w-1/4">
-        <p class="font-fira text-center text-white text-2xl font-semibold">Le JavaScript sera la suite</p>
-    </div>
-</section>
-
-<section class="bg-gradient-to-r from-blue to-blue-500 skew-y-3">
-    <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
-        <?php foreach ($categories as $category) { ?>
-            <?php if ($category -> name === 'JavaScript' ):?>
-                <?php foreach ($posts as $post){ ?>
-                    <?php if ($post-> categoryId === $category -> identifier ):?>
-                        <article class="bg-black shadow-2xl height border-b-10 border-solid border-brown w-2/4 lg:w-1/4">
-                            <div class="container-big">
-                                <div class="mx-10 grid grid-cols-blog gap-x-10 gap-y-10 md:grid-cols-blog-md">
-                                    <div class="space-y-5 flex-1 text-white">
-                                        <p class="text-blue"><?= htmlspecialchars($post -> frenchCreationDate)?></p>
-
-                                        <img src="./img/blog-dev.jpg" alt="" class="w-64">
-
-                                        <h1 class="subtitle"><?= htmlspecialchars($post -> title)?></h1>
-
-                                        <p class="main-text"><?= htmlspecialchars($post -> description)?></p>
-
-                                        <div class="flex justify-center">
-                                            <div class="button-bl" title="Cliquez ici pour découvrir l'article">
-                                                <a href="index.php?action=post&id=<?= urlencode($post -> identifier) ?>">
-                                                    <p class="button-blue">Lire l'article</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endif; ?>
-                <?php } ?>
-            <?php endif; ?>
-        <?php } ?>
+    <div class="flex justify-center">
+        <div class="button" title="Cliquez ici pour découvrir l'article">
+            <a href="index.php?action=posts">
+                <p class="button-primary hover:text-white">Accéder aux articles ⇨</p>
+            </a>
+        </div>
     </div>
 </section>
 

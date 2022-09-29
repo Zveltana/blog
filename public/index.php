@@ -2,10 +2,10 @@
 
 require ('vendor/autoload.php');
 
-use Application\Controllers\Comment\AddComment;
 use Application\Controllers\Comment\EditComment;
 use Application\Controllers\Homepage;
 use Application\Controllers\Post;
+use Application\Controllers\Posts;
 use Application\Controllers\Category;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
@@ -44,6 +44,8 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
+        } elseif ($_GET['action'] === 'posts') {
+            (new Posts())->execute();
         } elseif ($_GET['action'] === 'login') {
             (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {

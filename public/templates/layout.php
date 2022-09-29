@@ -22,8 +22,24 @@
                         <li class="text-brown-500">Accueil</li>
                         <?php endif;?>
 
+                        <?php if (isset($_GET['action']) && $_GET['action'] === 'posts'): ?>
+                            <li class="text-brown-500">Blog</li>
+                        <?php else:?>
+                            <li>
+                                <a href="index.php?action=posts" class="hover:text-brown-500">Blog</a>
+                            </li>
+                        <?php endif;?>
+
+                        <?php if (isset($_GET['action']) && $_GET['action'] === 'contact'): ?>
+                            <li class="text-brown-500">Contact</li>
+                        <?php else:?>
+                            <li>
+                                <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                            </li>
+                        <?php endif;?>
+
                         <li>
-                            <a href="contact.html" class="hover:text-brown-500">Contact</a>
+                            <a href="img/cv-amelia.pdf" class="hover:text-brown-500" target="_blank">Mon CV</a>
                         </li>
                     </ol>
                 </nav>
@@ -61,8 +77,24 @@
                             <li class="text-brown-500">Accueil</li>
                         <?php endif;?>
 
+                        <?php if (isset($_GET['action']) && $_GET['action'] === 'posts'): ?>
+                            <li class="text-brown-500">Blog</li>
+                        <?php else:?>
+                            <li>
+                                <a href="index.php?action=posts" class="hover:text-brown-500">Blog</a>
+                            </li>
+                        <?php endif;?>
+
+                        <?php if (isset($_GET['action']) && $_GET['action'] === 'contact'): ?>
+                            <li class="text-brown-500">Contact</li>
+                        <?php else:?>
+                            <li>
+                                <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                            </li>
+                        <?php endif;?>
+
                         <li>
-                            <a href="contact.html" class="hover:text-brown-500">Contact</a>
+                            <a href="img/cv-amelia.pdf" class="hover:text-brown-500" target="_blank">Mon CV</a>
                         </li>
                     </ol>
                 </nav>

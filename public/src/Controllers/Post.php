@@ -6,6 +6,7 @@ use Application\Model\Repository\PostRepository;
 use Application\Model\Repository\CommentRepository;
 use Application\Lib\DatabaseConnection;
 use Application\Model\Repository\UsersRepository;
+use Application\Model\Repository\CategoryRepository;
 
 class Post
 {
@@ -22,6 +23,10 @@ class Post
 
         $commentRepository = new CommentRepository($connection, $usersRepository);
         $comments = $commentRepository->getComments($identifier);
+
+        $categoriesRepository = new CategoryRepository();
+        $categoriesRepository->connection = $connection;
+        $category = $categoriesRepository->getCategoryById($post->categoryId);
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $errors = [];

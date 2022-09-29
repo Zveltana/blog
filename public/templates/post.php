@@ -3,17 +3,17 @@
 ob_start(); ?>
 
 <div class="height width space-y-10">
-    <p><a href="index.php" class="main-text text-brown-500 hover:text-green-500">Retour aux différents articles</a></p>
+    <p><a href="index.php?action=posts" class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> hover:text-green-500">Retour aux différents articles</a></p>
 
     <section class="flex justify-center">
-        <div class="py-16 bg-blob-brown bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-top lg:w-2/5">
+        <div class="py-16 <?php if($category->name === 'PHP'):?>bg-blob-brown<?php else: ?>bg-blob-blue <?php endif; ?> bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-top lg:w-2/5">
             <h1 class="title"><?= htmlspecialchars($post->title) ?></h1>
 
             <p class="main-text text-center">Date de l'article : <?= $post->frenchCreationDate ?></p>
         </div>
     </section>
 
-    <section class="bg-brown space-y-10 height px-8 md:px-16 xl:px-64">
+    <section class="<?php if($category->name === 'PHP'): ?>bg-brown<?php else: ?>bg-blue<?php endif; ?> space-y-10 height px-8 md:px-16 xl:px-64">
         <p class="text-right subtitle text-white">Ecrit par : <?= htmlspecialchars($user->getFullName()) ?></p>
         <h1 class="subtitle text-white"><?= htmlspecialchars($post->description) ?></h1>
         <p class="main-text text-white">
@@ -26,24 +26,24 @@ ob_start(); ?>
 
         <?php foreach ($comments as $comment) {?>
             <div class="space-y-3">
-                <h1 class="subtitle text-brown-500"><?= $comment->title ?></h1>
+                <h1 class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= $comment->title ?></h1>
                 <p class="main-text"><?= nl2br($comment->comment) ?></p>
 
                 <p><strong>Ecrit par : <?= $comment->author->getFullName() ?></strong> le <?= $comment->frenchCreationDate ?>
-                    <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="text-brown-500 hover:text-green-500">modifier</a>)</p><?php endif; ?>
+                    <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="<?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-green-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">modifier</a>)</p><?php endif; ?>
             </div>
 
-            <hr class="border-brown border-2 my-5">
+            <hr class="<?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> border-2 my-5">
         <?php } ?>
     </div>
 
     <?php if(isset($_SESSION['LOGGED_USER'])):?>
-    <form action="index.php?action=post&id=<?= $post->identifier?>" method="post" class="bg-white space-y-5 border-solid border-4 border-brown rounded-2xl">
+    <form action="index.php?action=post&id=<?= $post->identifier?>" method="post" class="bg-white space-y-5 border-solid border-4 <?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> rounded-2xl">
         <div class="height width">
-            <p class="subtitle text-brown-500 mb-10">Ajouter un commentaire</p>
+            <p class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> mb-10">Ajouter un commentaire</p>
 
             <?php if(isset($errorMessage)) : ?>
-                <div class="main-text font-semibold text-brown mb-5" role="alert">
+                <div class="main-text font-semibold <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> mb-5" role="alert">
                     <?php echo $errorMessage; ?>
                 </div>
             <?php endif; ?>
@@ -52,7 +52,7 @@ ob_start(); ?>
                     <label for="title" class="form-label main-text">Titre</label>
                     <input type="text" class="form-control main-text" id="title" name="title">
                     <?php if (!empty($errors['title'])): ?>
-                        <span class="error main-text text-brown font-semibold"><?= $errors['title']?></span>
+                        <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> font-semibold"><?= $errors['title']?></span>
                     <?php endif; ?>
                 </div>
             </div>
@@ -61,13 +61,13 @@ ob_start(); ?>
                 <label for="comment" class="form-label">Commentaire</label>
                 <textarea class="form-control" id="comment" name="comment"></textarea>
                 <?php if (!empty($errors['comment'])): ?>
-                    <span class="error main-text text-brown font-semibold"><?= $errors['comment']?></span>
+                    <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?>text-brown font-semibold"><?= $errors['comment']?></span>
                 <?php endif; ?>
             </div>
 
             <div class="flex">
-                <div class="button-b" title="Envoyez le formulaire">
-                    <button type="submit" class="button-brown">Envoyer</button>
+                <div class="<?php if($category->name === 'PHP'): ?>button-b<?php else: ?>button-bl<?php endif;?>" title="Envoyez le formulaire">
+                    <button type="submit" class="<?php if($category->name === 'PHP'): ?>button-brown<?php else: ?>button-blue<?php endif;?>">Envoyer</button>
                 </div>
             </div>
         </div>

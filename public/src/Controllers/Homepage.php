@@ -9,14 +9,6 @@ class Homepage
 {
     public function execute()
     {
-        $categoriesRepository = new CategoryRepository();
-        $categoriesRepository->connection = new DatabaseConnection();
-        $categories = $categoriesRepository->getCategories();
-
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
-        $posts = $postRepository->getPosts();
-
         require('templates/homepage.php');
     }
 }
