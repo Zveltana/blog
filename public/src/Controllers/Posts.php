@@ -15,8 +15,7 @@ class Posts
         $categoriesRepository->connection = $connection;
         $categories = $categoriesRepository->getCategories();
 
-        $postRepository = new PostRepository();
-        $postRepository->connection = $connection;
+        $postRepository = new PostRepository($connection);
         $posts = $postRepository->getPosts();
 
         require('templates/posts.php');

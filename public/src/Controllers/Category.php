@@ -7,7 +7,7 @@ use Application\Model\Repository\CategoryRepository;
 use Application\Model\Repository\PostRepository;
 
 class Category {
-    function execute(string $identifier)
+    function execute()
     {
         $connection = new DatabaseConnection();
 
@@ -15,9 +15,8 @@ class Category {
         $categoriesRepository->connection = new DatabaseConnection();
         $categories = $categoriesRepository->getCategories();
 
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
-        $post = $postRepository->getPosts($identifier);
+        $postRepository = new PostRepository($connection);
+        $post = $postRepository->getPosts();
 
         require('templates/homepage.php');
     }

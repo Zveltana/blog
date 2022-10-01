@@ -10,6 +10,8 @@ use Application\Controllers\Category;
 use Application\Controllers\Dashboard;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
+use Application\Controllers\User\UpdateUser;
+use Application\Controllers\Comment\CheckComment;
 use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
 
@@ -25,9 +27,7 @@ try {
             }
         } elseif ($_GET['action'] === 'category') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
-
-                (new Category())->execute($identifier);
+                (new Category())->execute();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -47,6 +47,10 @@ try {
             }
         } elseif ($_GET['action'] === 'dashboard') {
             (new Dashboard())->execute();
+        } elseif ($_GET['action'] === 'updateUser') {
+            (new UpdateUser())->execute();
+        } elseif ($_GET['action'] === 'checkComment') {
+            (new CheckComment())->execute();
         } elseif ($_GET['action'] === 'posts') {
             (new Posts())->execute();
         } elseif ($_GET['action'] === 'login') {

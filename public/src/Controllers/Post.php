@@ -14,15 +14,14 @@ class Post
     {
         $connection = new DatabaseConnection();
 
-        $postRepository = new PostRepository();
-        $postRepository->connection = $connection;
+        $postRepository = new PostRepository($connection);
         $post = $postRepository->getPost($identifier);
 
         $usersRepository = new UsersRepository($connection);
         $user = $usersRepository->getUserById($post->author);
 
-        $commentRepository = new CommentRepository($connection, $usersRepository);
-        $comments = $commentRepository->getComments($identifier);
+        $commentRepository = new CommentRepository($connection, $usersRepository, $postRepository);
+        $comments = $commentRepository->getCommentsByPost($identifier);
 
         $categoriesRepository = new CategoryRepository();
         $categoriesRepository->connection = $connection;
@@ -48,11 +47,11 @@ class Post
                 if (!$success) {
                     $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
                 } else {
+                    $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
                     header('Location: index.php?action=post&id=' . $identifier);
                 }
             }
         }
-
         require('templates/post.php');
     }
 }

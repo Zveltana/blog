@@ -2,8 +2,6 @@
 
 namespace Application\Model;
 
-use Application\Lib\DatabaseConnection;
-
 class User
 {
     private string $identifier;

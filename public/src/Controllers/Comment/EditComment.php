@@ -4,11 +4,13 @@ namespace Application\Controllers\Comment;
 
 use Application\Model\Repository\CommentRepository;
 use Application\lib\DatabaseConnection;
+use Application\Model\Repository\UsersRepository;
 
 class EditComment
 {
     public function execute(string $identifier, ?array $input): void
     {
+        $connection = new DatabaseConnection();
         if ($input !== null) {
             $author = null;
             $comment = null;
@@ -20,8 +22,7 @@ class EditComment
                 throw new \Exception('Les données du formulaire sont invalide');
             }
 
-            $commentRepository = new CommentRepository();
-            $commentRepository->connection = new DatabaseConnection();
+            $commentRepository = new CommentRepository($connection, new UsersRepository());
             $success = $commentRepository->editComment($identifier, $author, $comment);
 
             if (!$success) {
@@ -31,8 +32,7 @@ class EditComment
             }
         }
 
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
+        $commentRepository = new CommentRepository($connection, new UsersRepository());
         $comment = $commentRepository->getComment($identifier);
 
         if($comment === null) {

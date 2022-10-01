@@ -9,5 +9,6 @@ class Comment
     public User $author;
     public string $frenchCreationDate;
     public string $comment;
-    public string $postId;
+    public Post $postId;
+    public bool $IsEnabled;
 }

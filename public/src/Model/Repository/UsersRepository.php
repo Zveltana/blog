@@ -80,17 +80,29 @@ class UsersRepository
         return $user;
     }
 
-    public function createUser (string $fullName, string $email, string $password): bool {
+    public function createUser (User $user): bool {
         $statement = $this->connection->getConnection()->prepare(
             "INSERT INTO users(full_name, email, password) VALUES(:fullName, :email, :password)"
         );
 
         $statement->execute([
-            'fullName' => $fullName,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
+            'fullName' => $user->getFullName(),
+            'email' => $user->getEmail(),
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT)
         ]);
 
         return true;
     }
+
+    public function updateUser (User $user): void {
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE users SET is_admin = :is_admin WHERE id = :id"
+        );
+
+        $statement->execute([
+            'id' => $user->getIdentifier(),
+            'is_admin' => $user->getIsAdmin(),
+        ]);
+    }
+
 }

@@ -3,7 +3,7 @@
 ob_start(); ?>
 
 <div class="height width space-y-10">
-    <p><a href="index.php?action=posts" class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> hover:text-brown-500">Retour aux différents articles</a></p>
+    <p><a href="index.php?action=posts" class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-blue-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">Retour aux différents articles</a></p>
 
     <section class="flex justify-center">
         <div class="py-16 <?php if($category->name === 'PHP'):?>bg-blob-brown<?php else: ?>bg-blob-blue <?php endif; ?> bg-no-repeat bg-center bg-10 my-20 w-2/4 md:bg-15 lg:bg-14 lg:bg-left-top lg:w-2/5">
@@ -25,15 +25,17 @@ ob_start(); ?>
         <h2 class="subtitle mb-10">Commentaires</h2>
 
         <?php foreach ($comments as $comment) {?>
-            <div class="space-y-3">
-                <h1 class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= $comment->title ?></h1>
-                <p class="main-text"><?= nl2br($comment->comment) ?></p>
+            <?php if ($comment->IsEnabled === true):?>
+                <div class="space-y-3">
+                    <h1 class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= $comment->title ?></h1>
+                    <p class="main-text"><?= nl2br($comment->comment) ?></p>
 
-                <p><strong>Ecrit par : <?= $comment->author->getFullName() ?></strong> le <?= $comment->frenchCreationDate ?>
-                    <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="<?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-green-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">modifier</a>)</p><?php endif; ?>
-            </div>
+                    <p><strong>Ecrit par : <?= $comment->author->getFullName() ?></strong> le <?= $comment->frenchCreationDate ?>
+                        <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="<?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-green-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">modifier</a>)</p><?php endif; ?>
+                </div>
 
-            <hr class="<?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> border-2 my-5">
+                <hr class="<?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> border-2 my-5">
+            <?php endif;?>
         <?php } ?>
     </div>
 
@@ -47,6 +49,13 @@ ob_start(); ?>
                     <?php echo $errorMessage; ?>
                 </div>
             <?php endif; ?>
+
+            <?php if(isset($message)) : ?>
+                <div class="main-text font-semibold <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> mb-5" role="alert">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="mb-3">
                 <div class="space-x-5 flex items-center">
                     <label for="title" class="form-label main-text">Titre</label>
@@ -61,7 +70,7 @@ ob_start(); ?>
                 <label for="comment" class="form-label">Commentaire</label>
                 <textarea class="form-control" id="comment" name="comment"></textarea>
                 <?php if (!empty($errors['comment'])): ?>
-                    <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?>text-brown font-semibold"><?= $errors['comment']?></span>
+                    <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> font-semibold"><?= $errors['comment']?></span>
                 <?php endif; ?>
             </div>
 

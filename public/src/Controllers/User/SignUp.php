@@ -3,6 +3,7 @@ namespace Application\Controllers\User;
 
 use Application\Lib\DatabaseConnection;
 use Application\Model\Repository\UsersRepository;
+use Application\Model\User;
 
 class SignUp
 {
@@ -40,7 +41,11 @@ class SignUp
             }
 
             if (count($errors) === 0 && $user === null) {
-                $createUser = $usersRepository->createUser($postData['fullName'], $postData['email'], $postData['password']);
+                $user = new User();
+                $user->setFullName($postData['fullName']);
+                $user->setEmail($postData['email']);
+                $user->setPassword($postData['password']);
+                $createUser = $usersRepository->createUser($user);
 
                 $_SESSION['LOGGED_USER_fullName'] = $postData['fullName'];
 
