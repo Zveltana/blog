@@ -47,7 +47,8 @@ class SignUp
                 $user->setPassword($postData['password']);
                 $createUser = $usersRepository->createUser($user);
 
-                $_SESSION['LOGGED_USER_fullName'] = $postData['fullName'];
+                $_SESSION['LOGGED_USER'] = $postData['fullName'];
+                $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
                 header('Location: index.php');
             }

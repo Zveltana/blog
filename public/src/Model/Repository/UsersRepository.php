@@ -105,4 +105,14 @@ class UsersRepository
         ]);
     }
 
+    public function deleteUser (string $identifier): void {
+        $statement = $this->connection->getConnection()->prepare(
+            'DELETE FROM users WHERE id = :id'
+        );
+
+        $statement->execute([
+            'id' => $identifier,
+        ]);
+    }
+
 }

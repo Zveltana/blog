@@ -81,24 +81,23 @@ class CommentRepository
         return ($affectedLines > 0);
     }
 
-    public function editComment (string $identifier, string $title, string $comment): bool {
+    public function deleteComment (string $identifier): void {
         $statement = $this->connection->getConnection()->prepare(
-            'UPDATE comments SET title = ?, comment = ? WHERE id = ?'
-        );
-
-        $affectedLines = $statement->execute([$title, $comment, $identifier]);
-
-        return($affectedLines > 0);
-    }
-
-    public function checkComment (bool $IsEnabled, string $identifier): void {
-        $statement = $this->connection->getConnection()->prepare(
-            "UPDATE comments SET is_enabled = :is_enabled WHERE id = :id"
+            'DELETE FROM comments WHERE id = :id'
         );
 
         $statement->execute([
             'id' => $identifier,
-            'is_enabled' => $IsEnabled,
+        ]);
+    }
+
+    public function checkComment (string $identifier): void {
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE comments SET is_enabled = true WHERE id = :id"
+        );
+
+        $statement->execute([
+            'id' => $identifier,
         ]);
     }
 }

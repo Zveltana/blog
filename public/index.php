@@ -2,7 +2,6 @@
 
 require ('vendor/autoload.php');
 
-use Application\Controllers\Comment\EditComment;
 use Application\Controllers\Homepage;
 use Application\Controllers\Post;
 use Application\Controllers\Posts;
@@ -11,7 +10,9 @@ use Application\Controllers\Dashboard;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
 use Application\Controllers\User\UpdateUser;
+use Application\Controllers\User\DeleteUser;
 use Application\Controllers\Comment\CheckComment;
+use Application\Controllers\Comment\DeleteComment;
 use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
 
@@ -31,26 +32,16 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] === 'editComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
-
-                $input = null;
-
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
-                }
-
-                (new EditComment())->execute($identifier, $input);
-            } else {
-                throw new Exception('Aucun identifiant de commentaire envoyé');
-            }
         } elseif ($_GET['action'] === 'dashboard') {
             (new Dashboard())->execute();
         } elseif ($_GET['action'] === 'updateUser') {
             (new UpdateUser())->execute();
+        } elseif ($_GET['action'] === 'deleteUser') {
+            (new DeleteUser())->execute();
         } elseif ($_GET['action'] === 'checkComment') {
             (new CheckComment())->execute();
+        } elseif ($_GET['action'] === 'deleteComment') {
+            (new DeleteComment())->execute();
         } elseif ($_GET['action'] === 'posts') {
             (new Posts())->execute();
         } elseif ($_GET['action'] === 'login') {

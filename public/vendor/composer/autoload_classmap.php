@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Application\\Controllers\\Comment\\AddComment' => $baseDir . '/src/Controllers/Comment/AddComment.php',
-    'Application\\Controllers\\Comment\\EditComment' => $baseDir . '/src/Controllers/Comment/EditComment.php',
+    'Application\\Controllers\\Comment\\EditComment' => $baseDir . '/src/Controllers/Comment/DeleteComment.php',
     'Application\\Controllers\\Homepage' => $baseDir . '/src/Controllers/Homepage.php',
     'Application\\Controllers\\Post' => $baseDir . '/src/Controllers/Post.php',
     'Application\\Controllers\\User\\Login' => $baseDir . '/src/Controllers/User/Login.php',
