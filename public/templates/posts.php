@@ -20,9 +20,9 @@
 
 
 <section class="bg-gradient-to-r from-brown to-brown-500 skew-y-3 mt-10">
-    <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
-        <?php foreach ($categories as $category) { ?>
-            <?php if ($category->name === 'PHP' ):?>
+    <?php foreach ($categories as $category) { ?>
+        <?php if ($category->name === 'PHP' ):?>
+             <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
                 <?php foreach ($posts as $post){ ?>
                     <?php if ($post-> categoryId === $category->identifier ):?>
                         <article class="bg-black shadow-2xl height border-b-10 border-solid border-blue w-2/4 lg:w-1/4">
@@ -31,7 +31,7 @@
                                     <div class="space-y-5 flex-1 text-white">
                                         <p class="text-brown"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
-                                        <img src="./img/blog-dev.jpg" alt="" class="w-64">
+                                        <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
 
@@ -50,9 +50,19 @@
                         </article>
                     <?php endif; ?>
                 <?php } ?>
-            <?php endif; ?>
-        <?php } ?>
-    </div>
+             </div>
+
+            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+                <div class="flex justify-center -skew-y-3">
+                    <div class="button-add-php" title="Cliquez ici pour ajouter un article">
+                        <a href="index.php?action=addPost&id=<?= urlencode($category->identifier) ?>">
+                            <p class="button-add-php-article">+ Ajouter un article</p>
+                        </a>
+                    </div>
+                </div>
+            <?php endif;?>
+        <?php endif; ?>
+    <?php } ?>
 </section>
 
 <section class="bg-marbre skew-y-3 height">
@@ -62,9 +72,9 @@
 </section>
 
 <section class="bg-gradient-to-r from-blue to-blue-500 skew-y-3">
-    <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
-        <?php foreach ($categories as $category) { ?>
-            <?php if ($category->name === 'JavaScript' ):?>
+    <?php foreach ($categories as $category) { ?>
+        <?php if ($category->name === 'JavaScript' ):?>
+            <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
                 <?php foreach ($posts as $post){ ?>
                     <?php if ($post-> categoryId === $category->identifier ):?>
                         <article class="bg-black shadow-2xl height border-b-10 border-solid border-brown w-2/4 lg:w-1/4">
@@ -73,7 +83,7 @@
                                     <div class="space-y-5 flex-1 text-white">
                                         <p class="text-blue"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
-                                        <img src="./img/blog-dev.jpg" alt="" class="w-64">
+                                        <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
 
@@ -92,9 +102,19 @@
                         </article>
                     <?php endif; ?>
                 <?php } ?>
+            </div>
+
+            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+                <div class="flex justify-center -skew-y-3">
+                    <div class="button-add-js" title="Cliquez ici pour ajouter un article">
+                        <a href="index.php?action=addPost&id=<?= urlencode($category->identifier)?>">
+                            <p class="button-add-js-article">+ Ajouter un article</p>
+                        </a>
+                    </div>
+                </div>
             <?php endif; ?>
-        <?php } ?>
-    </div>
+        <?php endif; ?>
+    <?php } ?>
 </section>
 
 <?php $content = ob_get_clean(); ?>

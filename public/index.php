@@ -7,6 +7,7 @@ use Application\Controllers\Post;
 use Application\Controllers\Posts;
 use Application\Controllers\Category;
 use Application\Controllers\Dashboard;
+use Application\Controllers\AddPost;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
 use Application\Controllers\User\UpdateUser;
@@ -44,6 +45,8 @@ try {
             (new DeleteComment())->execute();
         } elseif ($_GET['action'] === 'posts') {
             (new Posts())->execute();
+        } elseif ($_GET['action'] === 'addPost') {
+            (new AddPost())->execute();
         } elseif ($_GET['action'] === 'login') {
             (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {
