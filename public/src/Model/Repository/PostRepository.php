@@ -97,4 +97,29 @@ class PostRepository
 
         return ($affectedLines > 0);
     }
+
+    public function updatePost(Post $post): void
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE posts SET title = :title, description = :description, content = :content, creation_date = NOW() WHERE id = :id "
+        );
+
+        $statement->execute([
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+            'content' => $_POST['content'],
+            'id' => $post->identifier,
+        ]);
+    }
+
+    public function deletePost(string $identifier)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'DELETE FROM posts WHERE id = :id'
+        );
+
+        $statement->execute([
+            'id' => $identifier,
+        ]);
+    }
 }

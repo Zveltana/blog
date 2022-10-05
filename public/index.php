@@ -5,6 +5,8 @@ require ('vendor/autoload.php');
 use Application\Controllers\Homepage;
 use Application\Controllers\Post;
 use Application\Controllers\Posts;
+use Application\Controllers\UpdatePost;
+use Application\Controllers\DeletePost;
 use Application\Controllers\Category;
 use Application\Controllers\Dashboard;
 use Application\Controllers\AddPost;
@@ -47,6 +49,10 @@ try {
             (new Posts())->execute();
         } elseif ($_GET['action'] === 'addPost') {
             (new AddPost())->execute();
+        } elseif ($_GET['action'] === 'updatePost') {
+            (new UpdatePost())->execute();
+        } elseif ($_GET['action'] === 'deletePost') {
+            (new DeletePost())->execute();
         } elseif ($_GET['action'] === 'login') {
             (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {

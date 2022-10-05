@@ -25,7 +25,7 @@
              <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
                 <?php foreach ($posts as $post){ ?>
                     <?php if ($post-> categoryId === $category->identifier ):?>
-                        <article class="bg-black shadow-2xl height border-b-10 border-solid border-blue w-2/4 lg:w-1/4">
+                        <article class="bg-black shadow-2xl py-10 border-b-10 border-solid border-blue w-2/4 lg:w-1/4">
                             <div class="container-big">
                                 <div class="mx-10 grid grid-cols-blog gap-x-10 gap-y-10 md:grid-cols-blog-md">
                                     <div class="space-y-5 flex-1 text-white">
@@ -44,6 +44,24 @@
                                                 </a>
                                             </div>
                                         </div>
+
+                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
+                                        <div class="flex justify-center">
+                                            <div class="button-b" title="Cliquez ici pour modifier l'article">
+                                                <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
+                                                    <p class="button-brown">Modifier l'article</p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                            <div class="flex justify-center">
+                                                <div class="button-b" title="Cliquez ici pour supprimer l'article">
+                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
+                                                        <p class="button-brown">Supprimer l'article</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +95,7 @@
             <div class="width height flex flex-wrap -skew-y-3 gap-x-5 gap-y-5 lg:flex-nowrap lg:gap-y-0 lg:gap-x-10">
                 <?php foreach ($posts as $post){ ?>
                     <?php if ($post-> categoryId === $category->identifier ):?>
-                        <article class="bg-black shadow-2xl height border-b-10 border-solid border-brown w-2/4 lg:w-1/4">
+                        <article class="bg-black shadow-2xl py-10 border-b-10 border-solid border-brown w-2/4 lg:w-1/4">
                             <div class="container-big">
                                 <div class="mx-10 grid grid-cols-blog gap-x-10 gap-y-10 md:grid-cols-blog-md">
                                     <div class="space-y-5 flex-1 text-white">
@@ -96,6 +114,24 @@
                                                 </a>
                                             </div>
                                         </div>
+
+                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
+                                            <div class="flex justify-center">
+                                                <div class="button-bl" title="Cliquez ici pour modifier l'article">
+                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
+                                                        <p class="button-blue">Modifier l'article</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex justify-center">
+                                                <div class="button-bl" title="Cliquez ici pour supprimer l'article">
+                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
+                                                        <p class="button-blue">Supprimer l'article</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
