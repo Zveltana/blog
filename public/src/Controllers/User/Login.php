@@ -16,7 +16,6 @@ class Login
         }
 
         $connection = new DatabaseConnection();
-
         $usersRepository = new UsersRepository($connection);
 
         $errors = [];

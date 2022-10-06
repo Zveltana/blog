@@ -8,14 +8,17 @@ use Application\Controllers\Posts;
 use Application\Controllers\Category;
 use Application\Controllers\Dashboard;
 use Application\Controllers\AddPost;
+use Application\Controllers\submitContact;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
 use Application\Controllers\User\UpdateUser;
 use Application\Controllers\User\DeleteUser;
 use Application\Controllers\Comment\CheckComment;
 use Application\Controllers\Comment\DeleteComment;
-use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
+use Application\Controllers\MailerController;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -47,6 +50,10 @@ try {
             (new Posts())->execute();
         } elseif ($_GET['action'] === 'addPost') {
             (new AddPost())->execute();
+        } elseif ($_GET['action'] === 'contact') {
+            (new MailerController())->execute();
+        } elseif ($_GET['action'] === 'submitContact') {
+            (new SubmitContact())->execute();
         } elseif ($_GET['action'] === 'login') {
             (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {

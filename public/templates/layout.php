@@ -34,7 +34,7 @@
                             <li class="text-brown-500">Contact</li>
                         <?php else:?>
                             <li>
-                                <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                                <a href="index.php?action=contact" class="hover:text-brown-500">Contact</a>
                             </li>
                         <?php endif;?>
 
@@ -89,7 +89,7 @@
                             <li class="text-brown-500">Contact</li>
                         <?php else:?>
                             <li>
-                                <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                                <a href="index.php?action=contact" class="hover:text-brown-500">Contact</a>
                             </li>
                         <?php endif;?>
 
@@ -143,7 +143,7 @@
                     <li class="text-brown-500">Contact</li>
                 <?php else:?>
                     <li>
-                        <a href="index.php?action=posts" class="hover:text-brown-500">Contact</a>
+                        <a href="index.php?action=contact" class="hover:text-brown-500">Contact</a>
                     </li>
                 <?php endif;?>
 
