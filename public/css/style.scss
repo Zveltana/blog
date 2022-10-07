@@ -13,6 +13,10 @@
   display: block;
 }
 
+.container-big {
+  @apply 2xl:container 2xl:mx-auto;
+}
+
 .width {
   @apply mx-8 md:mx-16 xl:mx-64;
 }
