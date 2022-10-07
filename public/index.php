@@ -5,6 +5,8 @@ require ('vendor/autoload.php');
 use Application\Controllers\Homepage;
 use Application\Controllers\Post;
 use Application\Controllers\Posts;
+use Application\Controllers\UpdatePost;
+use Application\Controllers\DeletePost;
 use Application\Controllers\Category;
 use Application\Controllers\Dashboard;
 use Application\Controllers\AddPost;
@@ -15,6 +17,7 @@ use Application\Controllers\User\UpdateUser;
 use Application\Controllers\User\DeleteUser;
 use Application\Controllers\Comment\CheckComment;
 use Application\Controllers\Comment\DeleteComment;
+use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
 use Application\Controllers\MailerController;
 use Symfony\Component\Mailer\Mailer;
@@ -50,6 +53,10 @@ try {
             (new Posts())->execute();
         } elseif ($_GET['action'] === 'addPost') {
             (new AddPost())->execute();
+        } elseif ($_GET['action'] === 'updatePost') {
+            (new UpdatePost())->execute();
+        } elseif ($_GET['action'] === 'deletePost') {
+            (new DeletePost())->execute();
         } elseif ($_GET['action'] === 'contact') {
             (new MailerController())->execute();
         } elseif ($_GET['action'] === 'submitContact') {

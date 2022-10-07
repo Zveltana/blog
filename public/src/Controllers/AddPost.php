@@ -36,9 +36,6 @@ class AddPost
             $content = htmlspecialchars($_POST['content'], ENT_COMPAT);
             $picture = $_FILES['picture'];
 
-            var_dump($_FILES['picture']['name']);
-            var_dump($_FILES['picture']['tmp_name']);
-
             if (count($errors) === 0) {
                 if (isset($picture) && $picture['error'] === 0)
                 {
