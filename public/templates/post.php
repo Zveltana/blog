@@ -27,8 +27,7 @@ ob_start(); ?>
         <?php foreach ($comments as $comment) {?>
             <?php if ($comment->IsEnabled === true):?>
                 <div class="space-y-3">
-                    <h1 class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= $comment->title ?></h1>
-                    <p class="main-text"><?= nl2br($comment->comment) ?></p>
+                    <p class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= nl2br($comment->comment) ?></p>
 
                     <p><strong>Ecrit par : <?= $comment->author->getFullName() ?></strong> le <?= $comment->frenchCreationDate ?>
                         <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="<?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-green-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">modifier</a>)</p><?php endif; ?>
@@ -55,16 +54,6 @@ ob_start(); ?>
                     <?php echo $message; ?>
                 </div>
             <?php endif; ?>
-
-            <div class="mb-3">
-                <div class="space-x-5 flex items-center">
-                    <label for="title" class="form-label main-text">Titre</label>
-                    <input type="text" class="form-control main-text" id="title" name="title">
-                    <?php if (!empty($errors['title'])): ?>
-                        <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> font-semibold"><?= $errors['title']?></span>
-                    <?php endif; ?>
-                </div>
-            </div>
 
             <div class="mb-3 main-text space-x-5 flex items-center">
                 <label for="comment" class="form-label">Commentaire</label>

@@ -92,3 +92,8 @@
 .subtitle {
   @apply font-oleo text-base font-semibold md:text-lg xl:text-xl;
 }
+
+.underline {
+  text-decoration: underline #A68C7C;
+  text-underline-position: under;
+}
