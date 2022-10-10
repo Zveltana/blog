@@ -17,7 +17,7 @@
                 plairons et
                 n'hésitez pas à me contacter sur mes différents réseaux sociaux.</p>
 
-            <div class="flex w-14 flex-wrap justify-around md:w-24">
+            <div class="flex w-20 flex-wrap justify-around md:w-32">
                 <a href="https://www.linkedin.com/in/am%C3%A9lia-massot-d%C3%A9veloppement-communication-digital-web/" target="_blank" class="justify-around">
                     <img src="img/linkedin.svg"
                          alt="icone linkedin"
@@ -30,6 +30,13 @@
                          alt="icone twitter"
                          title="Logo Twitter"
                          class="w-6 md:w-8 xl:w-10 bg-brown rounded-full"/>
+                </a>
+
+                <a href="https://github.com/Zveltana" target="_blank" class="justify-around">
+                    <img src="img/github.svg"
+                         alt="icone github"
+                         title="Logo Github"
+                         class="w-6 md:w-8 xl:w-10"/>
                 </a>
             </div>
         </div>
