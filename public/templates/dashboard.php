@@ -68,11 +68,9 @@
                             <div class="container-big">
                                 <div class="gap-x-10 mx-5 2xl:mx-10">
                                     <div class="space-y-5 flex-1 text-white">
-                                        <h1 class="title"> <?= $post->title?></h1>
+                                        <h1 class="title">Article :<hr class="border-brown mb-4 mt-2"> <?= $post->title?></h1><hr class="border-brown">
 
-                                        <h2 class="subtitle"><?= $comment->title ?></h2>
-
-                                        <p class="main-text"><?= $comment->comment ?></p>
+                                        <p class="main-text"><span class="underline">Commentaire :</span> <?= $comment->comment ?></p>
 
                                         <div class="flex flex-col items-center gap-y-5">
                                             <div>

@@ -20,7 +20,7 @@ class CommentRepository
 
     public function getCommentsByPost(string $post): array {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date,is_enabled, user_id, post_id FROM comments WHERE post_id = ? ORDER BY id DESC"
+            "SELECT id, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date,is_enabled, user_id, post_id FROM comments WHERE post_id = ? ORDER BY id DESC"
         );
 
         $statement->execute([$post]);
@@ -31,7 +31,6 @@ class CommentRepository
             $postId = $this->postRepository->getPostById($row['post_id']);
 
             $comment = new Comment();
-            $comment->title = $row['title'];
             $comment->author = $author;
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->comment = $row['comment'];
@@ -48,7 +47,7 @@ class CommentRepository
     public function getComments(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, is_enabled, user_id, post_id FROM comments ORDER BY id DESC"
+            "SELECT id, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, is_enabled, user_id, post_id FROM comments ORDER BY id DESC"
         );
 
         $comments = [];
@@ -57,7 +56,6 @@ class CommentRepository
             $postId = $this->postRepository->getPostById($row['post_id']);
 
             $comment = new Comment();
-            $comment->title = $row['title'];
             $comment->author = $author;
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->comment = $row['comment'];
@@ -71,12 +69,12 @@ class CommentRepository
         return $comments;
     }
 
-    public function createComment (string $post, string $author, string $title, string $comment): bool {
+    public function createComment (string $post, string $author, string $comment): bool {
         $statement = $this->connection->getConnection()->prepare("
-        INSERT INTO comments(post_id, user_id, title, comment, comment_date) VALUES(?, ?, ?, ?, NOW())
+        INSERT INTO comments(post_id, user_id, comment, comment_date) VALUES(?, ?, ?, NOW())
         ");
 
-        $affectedLines = $statement->execute([$post, $author, $title, $comment]);
+        $affectedLines = $statement->execute([$post, $author, $comment]);
 
         return ($affectedLines > 0);
     }
