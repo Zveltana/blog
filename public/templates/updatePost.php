@@ -30,6 +30,11 @@
                     <textarea id="content" name="content"><?= $post->content ?></textarea>
                 </div>
 
+                <div class="mb-3 main-text space-x-5">
+                    <label for="picture" class="form-label">Image de l'article</label>
+                    <input type="file" id="picture" class="form-control" name="picture" value="<?= $post->picture ?>">
+                </div>
+
                 <div class="flex">
                     <div class="button-g" title="Modifier l'article">
                         <button type="submit" class="button-green">Modifier</button>

@@ -31,9 +31,9 @@ class AddPost
                 $errors['content'] = 'Veuillez remplir ce champ.';
             }
 
-            $title = htmlspecialchars($_POST['title']);
-            $description = htmlspecialchars($_POST['description'], ENT_COMPAT);
-            $content = htmlspecialchars($_POST['content'], ENT_COMPAT);
+            $title = strip_tags($_POST['title']);
+            $description = strip_tags($_POST['description']);
+            $content = strip_tags($_POST['content']);
             $picture = $_FILES['picture'];
 
             if (count($errors) === 0) {
@@ -43,7 +43,7 @@ class AddPost
                     {
                         $fileInfo = pathinfo($picture['name']);
                         $extension = $fileInfo['extension'];
-                        $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
+                        $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'svg'];
                         if (in_array($extension, $allowedExtensions, true))
                         {
                             move_uploaded_file($_FILES['picture']['tmp_name'], 'img/blog/' . basename($picture['name']));

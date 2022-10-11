@@ -14,10 +14,10 @@ ob_start(); ?>
     </section>
 
     <section class="<?php if($category->name === 'PHP'): ?>bg-brown<?php else: ?>bg-blue<?php endif; ?> space-y-10 height px-8 md:px-16 xl:px-64">
-        <p class="text-right subtitle text-white">Ecrit par : <?= htmlspecialchars($user->getFullName()) ?></p>
-        <h1 class="subtitle text-white"><?= htmlspecialchars($post->description) ?></h1>
+        <p class="text-right subtitle text-white">Ecrit par : <?= $user->getFullName() ?></p>
+        <h1 class="subtitle text-white"><?= $post->description ?></h1>
         <p class="main-text text-white">
-            <?= nl2br (htmlspecialchars($post->content)) ?>
+            <?= nl2br ($post->content) ?>
         </p>
     </section>
 

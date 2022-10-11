@@ -19,7 +19,7 @@ class UpdatePost
             $redirection = new Redirect();
 
 
-            if($postData['title'] !== $post->title || $postData['description'] !== $post->description || $postData['content'] !== $post->content)
+            if($postData['title'] !== $post->title || $postData['description'] !== $post->description || $postData['content'] !== $post->content || $_POST['picture'] !== $post->picture)
             {
                 $postRepository->updatePost($post);
                 $redirection->execute('index.php?action=posts');

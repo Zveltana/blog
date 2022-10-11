@@ -54,7 +54,7 @@
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
                                         <div class="flex justify-center">
                                             <div class="button-b" title="Cliquez ici pour modifier l'article">
-                                                <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
+                                                <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
                                                     <p class="button-brown">Modifier l'article</p>
                                                 </a>
                                             </div>
@@ -62,7 +62,7 @@
 
                                             <div class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
+                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
                                                         <p class="button-brown">Supprimer l'article</p>
                                                     </a>
                                                 </div>
@@ -128,7 +128,7 @@
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
                                             <div class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour modifier l'article">
-                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
+                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
                                                         <p class="button-blue">Modifier l'article</p>
                                                     </a>
                                                 </div>
@@ -136,7 +136,7 @@
 
                                             <div class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
+                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
                                                         <p class="button-blue">Supprimer l'article</p>
                                                     </a>
                                                 </div>

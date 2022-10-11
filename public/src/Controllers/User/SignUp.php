@@ -42,12 +42,12 @@ class SignUp
 
             if (count($errors) === 0 && $user === null) {
                 $user = new User();
-                $user->setFullName($postData['fullName']);
-                $user->setEmail($postData['email']);
-                $user->setPassword($postData['password']);
+                $user->setFullName(strip_tags($postData['fullName']));
+                $user->setEmail(strip_tags($postData['email']));
+                $user->setPassword(strip_tags($postData['password']));
                 $createUser = $usersRepository->createUser($user);
 
-                $_SESSION['LOGGED_USER'] = $postData['fullName'];
+                $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
                 $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
                 header('Location: index.php');
