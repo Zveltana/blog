@@ -51,7 +51,7 @@ ob_start(); ?>
 
             <?php if(isset($message)) : ?>
                 <div class="main-text font-semibold <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> mb-5" role="alert">
-                    <?php echo $message; ?>
+                    <?= $message ?>
                 </div>
             <?php endif; ?>
 

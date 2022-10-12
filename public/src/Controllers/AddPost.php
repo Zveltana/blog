@@ -30,31 +30,34 @@ class AddPost
             if (empty($_POST['content'])) {
                 $errors['content'] = 'Veuillez remplir ce champ.';
             }
-
-            $title = strip_tags($_POST['title']);
-            $description = strip_tags($_POST['description']);
-            $content = strip_tags($_POST['content']);
-            $picture = $_FILES['picture'];
+            if (empty($_FILES['picture']['name'])) {
+                $errors['picture'] = 'Veuillez remplir ce champ.';
+            }
 
             if (count($errors) === 0) {
+                $title = strip_tags($_POST['title']);
+                $description = strip_tags($_POST['description']);
+                $content = strip_tags($_POST['content']);
+                $picture = $_FILES['picture'];
+
+                $fileInfo = pathinfo($picture['name']);
+                $extension = $fileInfo['extension'];
+
+                $move = sprintf("img/blog/%s.%s", md5(basename($picture['name'])), $extension);
+
                 if (isset($picture) && $picture['error'] === 0)
                 {
                     if ($picture['size'] <= 1000000)
                     {
-                        $fileInfo = pathinfo($picture['name']);
-                        $extension = $fileInfo['extension'];
                         $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'svg'];
                         if (in_array($extension, $allowedExtensions, true))
                         {
-                            move_uploaded_file($_FILES['picture']['tmp_name'], 'img/blog/' . basename($picture['name']));
-                            echo "L'envoi a bien été effectué !";
-                            var_dump($fileInfo);
-
+                            move_uploaded_file($_FILES['picture']['tmp_name'], $move);
                         }
                     }
                 }
 
-                $success = $postRepository->createPost($title, $_SESSION['LOGGED_USER_ID'], $description, $content, $_FILES['picture']['name'], $_GET['id']);
+                $success = $postRepository->createPost($title, $_SESSION['LOGGED_USER_ID'], $description, $content, $move, $_GET['id']);
 
                 if (!$success) {
                     $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter l\'article !');

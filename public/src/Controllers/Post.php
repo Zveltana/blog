@@ -43,8 +43,7 @@ class Post
                 if (!$success) {
                     $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
                 } else {
-                    $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
-                    header('Location: index.php?action=post&id=' . $identifier);
+                    $message = sprintf('Votre commentaire est en attente de validation par un administrateur.');
                 }
             }
         }

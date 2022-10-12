@@ -89,6 +89,16 @@ class CommentRepository
         ]);
     }
 
+    public function deleteCommentByPost (string $post): void {
+        $statement = $this->connection->getConnection()->prepare(
+            'DELETE FROM comments WHERE post_id = :post_id'
+        );
+
+        $statement->execute([
+            'post_id' => $post,
+        ]);
+    }
+
     public function checkComment (string $identifier): void {
         $statement = $this->connection->getConnection()->prepare(
             "UPDATE comments SET is_enabled = true WHERE id = :id"

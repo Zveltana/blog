@@ -4,7 +4,7 @@
     <section class="width height">
         <h1 class="title mb-20">Modification du commentaire : <?= $post->title ?></h1>
 
-        <form action="" method="post" class="bg-white space-y-5 border-solid border-4 border-brown rounded-2xl">
+        <form action="" method="post" class="bg-white space-y-5 border-solid border-4 border-brown rounded-2xl" enctype="multipart/form-data">
             <div class="height width">
                 <!-- si message d'erreur on l'affiche -->
                 <?php if(isset($errorMessage)) : ?>
@@ -34,6 +34,8 @@
                     <label for="picture" class="form-label">Image de l'article</label>
                     <input type="file" id="picture" class="form-control" name="picture" value="<?= $post->picture ?>">
                 </div>
+
+                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
                 <div class="flex">
                     <div class="button-g" title="Modifier l'article">

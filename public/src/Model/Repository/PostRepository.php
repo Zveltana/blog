@@ -105,10 +105,10 @@ class PostRepository
         );
 
         $statement->execute([
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
-            'content' => $_POST['content'],
-            'picture' => $_POST['picture'],
+            'title' => $post->title,
+            'description' => $post->description,
+            'content' => $post->content,
+            'picture' => $post->picture,
             'id' => $post->identifier,
         ]);
     }

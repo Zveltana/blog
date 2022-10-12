@@ -62,8 +62,6 @@ try {
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author) {
                 (new UpdatePost())->execute();
-            } else {
-                throw new Exception('Vous n\'avez pas les droits pour accéder à cette page.');
             }
         } elseif ($_GET['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
             $connection = new DatabaseConnection();
@@ -71,11 +69,7 @@ try {
             $post = $postRepository->getPost($_GET['id']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author){
-                if(isset($_GET['token']) && $_GET['token'] === $_SESSION['token']) {
-                    (new DeletePost())->execute();
-                } else {
-                    throw new Exception('Jeton de sécurité périmé');
-                }
+                (new DeletePost())->execute();
             } else {
                 throw new Exception('Vous n\'avez pas les droits pour accéder à cette page.');
             }

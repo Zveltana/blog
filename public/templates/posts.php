@@ -36,7 +36,7 @@
                                         <p class="text-brown"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
                                         <div class="flex justify-center">
-                                            <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
+                                            <img src="<?= $post->picture ?>" alt="" class="w-64">
                                         </div>
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
@@ -52,21 +52,21 @@
                                         </div>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                        <div class="flex justify-center">
-                                            <div class="button-b" title="Cliquez ici pour modifier l'article">
-                                                <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
-                                                    <p class="button-brown">Modifier l'article</p>
-                                                </a>
-                                            </div>
-                                        </div>
-
                                             <div class="flex justify-center">
-                                                <div class="button-b" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
-                                                        <p class="button-brown">Supprimer l'article</p>
+                                                <div class="button-b" title="Cliquez ici pour modifier l'article">
+                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
+                                                        <p class="button-brown">Modifier l'article</p>
                                                     </a>
                                                 </div>
                                             </div>
+
+                                            <form action="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>" method="post" class="flex justify-center">
+                                                <div class="button-b" title="Cliquez ici pour supprimer l'article">
+                                                    <button class="button-brown">Supprimer l'article</button>
+
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                                </div>
+                                            </form>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                         <p class="text-blue"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
                                         <div class="flex justify-center">
-                                            <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
+                                            <img src="<?= $post->picture ?>" alt="" class="w-64">
                                         </div>
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
@@ -134,13 +134,13 @@
                                                 </div>
                                             </div>
 
-                                            <div class="flex justify-center">
+                                            <form action="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
-                                                        <p class="button-blue">Supprimer l'article</p>
-                                                    </a>
+                                                    <button class="button-blue">Supprimer l'article</button>
+
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                                                 </div>
-                                            </div>
+                                            </form>
                                         <?php endif; ?>
                                     </div>
                                 </div>
