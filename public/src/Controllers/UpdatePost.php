@@ -13,18 +13,18 @@ class UpdatePost
         $postData = $_POST;
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository($connection);
-        $post = $postRepository->getPost($_GET['id']);
+        $post = $postRepository->getPost($postData['identifier']);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ('POST' === $_SERVER['REQUEST_METHOD']) {
             if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']){
-                $post = $postRepository->getPostById($_GET['id']);
+                $post = $postRepository->getPostById($postData['identifier']);
                 $redirection = new Redirect();
 
                 if($postData['title'] !== $post->title || $postData['description'] !== $post->description || $postData['content'] !== $post->content || !empty($_FILES))
                 {
-                    $post->title = $_POST['title'];
-                    $post->description = $_POST['description'];
-                    $post->content = $_POST['content'];
+                    $post->title = $postData['title'];
+                    $post->description = $postData['description'];
+                    $post->content = $postData['content'];
 
                     if (!empty($_FILES['picture']) && $_FILES['picture']['error'] === 0)
                     {

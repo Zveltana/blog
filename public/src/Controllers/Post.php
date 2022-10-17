@@ -28,22 +28,24 @@ class Post
         $category = $categoriesRepository->getCategoryById($post->categoryId);
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
-            $errors = [];
-            $comment = null;
+            if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
+                $errors = [];
+                $comment = null;
 
-            if (empty($_POST['comment'])) {
-                $errors['comment'] = 'Veuillez remplir ce champ.';
-            }
+                if (empty($_POST['comment'])) {
+                    $errors['comment'] = 'Veuillez remplir ce champ.';
+                }
 
-            $comment = htmlspecialchars($_POST['comment'], ENT_COMPAT);
+                $comment = htmlspecialchars($_POST['comment'], ENT_COMPAT);
 
-            if (count($errors) === 0) {
-                $success = $commentRepository->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
+                if (count($errors) === 0) {
+                    $success = $commentRepository->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
 
-                if (!$success) {
-                    $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
-                } else {
-                    $message = sprintf('Votre commentaire est en attente de validation par un administrateur.');
+                    if (!$success) {
+                        $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
+                    } else {
+                        $message = sprintf('Votre commentaire est en attente de validation par un administrateur.');
+                    }
                 }
             }
         }

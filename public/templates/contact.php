@@ -59,6 +59,8 @@
                     <?php endif; ?>
                 </div>
 
+                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
                 <div class="flex">
                     <div class="button-g" title="Envoyez le formulaire">
                         <button type="submit" class="button-green">Envoyer</button>

@@ -43,28 +43,35 @@
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <div class="flex justify-center">
+                                        <form action="index.php?action=post" method="post" class="flex justify-center">
                                             <div class="button-b" title="Cliquez ici pour découvrir l'article">
-                                                <a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">
-                                                    <p class="button-brown">Lire l'article</p>
-                                                </a>
+                                                <button class="button-brown">Lire l'article</button>
+
+                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </div>
+                                        </form>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                            <div class="flex justify-center">
+                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour modifier l'article">
-                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
-                                                        <p class="button-brown">Modifier l'article</p>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                                    <button class="button-brown">Modifier l'article</button>
 
-                                            <form action="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>" method="post" class="flex justify-center">
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
+                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
+                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
+                                                </div>
+                                            </form>
+
+                                            <form action="index.php?action=deletePost" method="post" class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour supprimer l'article">
                                                     <button class="button-brown">Supprimer l'article</button>
 
                                                     <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
                                             </form>
                                         <?php endif; ?>
@@ -117,28 +124,35 @@
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <div class="flex justify-center">
+                                        <form action="index.php?action=post" method="post" class="flex justify-center">
                                             <div class="button-bl" title="Cliquez ici pour découvrir l'article">
-                                                <a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">
-                                                    <p class="button-blue">Lire l'article</p>
-                                                </a>
+                                                <button class="button-blue">Lire l'article</button>
+
+                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </div>
+                                        </form>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                            <div class="flex justify-center">
+                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour modifier l'article">
-                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>&token=<?= $_SESSION['token'] ?>">
-                                                        <p class="button-blue">Modifier l'article</p>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                                    <button class="button-blue">Modifier l'article</button>
 
-                                            <form action="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>" method="post" class="flex justify-center">
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
+                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
+                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
+                                                </div>
+                                            </form>
+
+                                            <form action="index.php?action=deletePost" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour supprimer l'article">
                                                     <button class="button-blue">Supprimer l'article</button>
 
                                                     <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
                                             </form>
                                         <?php endif; ?>

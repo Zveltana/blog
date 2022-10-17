@@ -10,6 +10,10 @@ ob_start(); ?>
             <h1 class="title"><?= htmlspecialchars($post->title) ?></h1>
 
             <p class="main-text text-center">Date de l'article : <?= $post->frenchCreationDate ?></p>
+
+            <div class="flex justify-center mt-5">
+                <img src="<?= $post->picture ?>" alt="image représentant l'article" class="w-20">
+            </div>
         </div>
     </section>
 
@@ -39,7 +43,7 @@ ob_start(); ?>
     </div>
 
     <?php if(isset($_SESSION['LOGGED_USER'])):?>
-    <form action="index.php?action=post&id=<?= $post->identifier?>" method="post" class="bg-white space-y-5 border-solid border-4 <?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> rounded-2xl">
+    <form action="index.php?action=post" method="post" class="bg-white space-y-5 border-solid border-4 <?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> rounded-2xl">
         <div class="height width">
             <p class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> mb-10">Ajouter un commentaire</p>
 
@@ -62,6 +66,10 @@ ob_start(); ?>
                     <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> font-semibold"><?= $errors['comment']?></span>
                 <?php endif; ?>
             </div>
+
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+            <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
 
             <div class="flex">
                 <div class="<?php if($category->name === 'PHP'): ?>button-b<?php else: ?>button-bl<?php endif;?>" title="Envoyez le formulaire">

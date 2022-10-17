@@ -28,16 +28,10 @@ use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
+            if (isset($_POST['identifier']) && $_POST['identifier'] > 0) {
+                $identifier = $_POST['identifier'];
 
                 (new Post())->execute($identifier);
-            } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
-        } elseif ($_GET['action'] === 'category') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                (new Category())->execute();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -58,7 +52,7 @@ try {
         } elseif ($_GET['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
             $connection = new DatabaseConnection();
             $postRepository = new PostRepository($connection);
-            $post = $postRepository->getPost($_GET['id']);
+            $post = $postRepository->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author) {
                 (new UpdatePost())->execute();
@@ -66,7 +60,7 @@ try {
         } elseif ($_GET['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
             $connection = new DatabaseConnection();
             $postRepository = new PostRepository($connection);
-            $post = $postRepository->getPost($_GET['id']);
+            $post = $postRepository->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author){
                 (new DeletePost())->execute();

@@ -30,12 +30,18 @@
                     <textarea id="content" name="content"><?= $post->content ?></textarea>
                 </div>
 
-                <div class="mb-3 main-text space-x-5">
-                    <label for="picture" class="form-label">Image de l'article</label>
+                <div class="mb-3 main-text space-x-5 flex">
+                    <div>
+                        <label for="picture" class="form-label">Image de l'article</label>
+
+                        <img src="<?= $post->picture?>" alt="" class="w-12 md:w-20">
+                    </div>
                     <input type="file" id="picture" class="form-control" name="picture" value="<?= $post->picture ?>">
                 </div>
 
                 <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
 
                 <div class="flex">
                     <div class="button-g" title="Modifier l'article">

@@ -6,7 +6,6 @@
 
     <div class="flex flex-col gap-y-10 items-center lg:gap-y-0 lg:gap-x-20 lg:flex-row lg:flex-nowrap">
         <div class="space-y-10">
-            <?php echo $_SESSION['token'] ?>
             <h2 class="subtitle">Laissez moi me présenter en quelques lignes.</h2>
 
             <p class="main-text text-justify">Je suis une développeuse en alternance depuis maintenant un an dans l'entreprise

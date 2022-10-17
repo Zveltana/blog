@@ -23,10 +23,10 @@ class DeletePost
         if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
 
 
-            $post = $postRepository->getPostById($_GET['id']);
+            $post = $postRepository->getPostById($_POST['identifier']);
 
-            $commentRepository->deleteCommentByPost($_GET['id']);
-            $postRepository->deletePost($_GET['id']);
+            $commentRepository->deleteCommentByPost($_POST['identifier']);
+            $postRepository->deletePost($_POST['identifier']);
 
             if (file_exists($post->picture)) {
                 unlink($post->picture);
