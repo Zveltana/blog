@@ -97,3 +97,11 @@
   text-decoration: underline #A68C7C;
   text-underline-position: under;
 }
+
+input, textarea {
+  @apply bg-brown rounded-md border-b-2 border-b-green-500 p-2 text-white;
+}
+
+input::placeholder {
+   @apply text-brown-500;
+}
