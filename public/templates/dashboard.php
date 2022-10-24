@@ -1,4 +1,4 @@
-<?php $title = 'Blog'; ?>
+<?php $title = 'Dashboard'; ?>
 
 <?php ob_start();?>
 

@@ -17,7 +17,7 @@ class PostRepository
     public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, description, content, picture, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id, user_id FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+            "SELECT id, title, description, content, picture, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id, user_id FROM posts ORDER BY creation_date DESC"
         );
 
         $posts = [];
@@ -101,13 +101,14 @@ class PostRepository
     public function updatePost(Post $post): void
     {
         $statement = $this->connection->getConnection()->prepare(
-            "UPDATE posts SET title = :title, description = :description, content = :content, creation_date = NOW() WHERE id = :id "
+            "UPDATE posts SET title = :title, description = :description, content = :content, picture = :picture, creation_date = NOW() WHERE id = :id "
         );
 
         $statement->execute([
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
-            'content' => $_POST['content'],
+            'title' => $post->title,
+            'description' => $post->description,
+            'content' => $post->content,
+            'picture' => $post->picture,
             'id' => $post->identifier,
         ]);
     }

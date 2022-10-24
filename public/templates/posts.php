@@ -36,37 +36,44 @@
                                         <p class="text-brown"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
                                         <div class="flex justify-center">
-                                            <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
+                                            <img src="<?= $post->picture ?>" alt="" class="w-64">
                                         </div>
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <div class="flex justify-center">
+                                        <form action="index.php?action=post" method="post" class="flex justify-center">
                                             <div class="button-b" title="Cliquez ici pour découvrir l'article">
-                                                <a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">
-                                                    <p class="button-brown">Lire l'article</p>
-                                                </a>
+                                                <button class="button-brown">Lire l'article</button>
+
+                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </div>
+                                        </form>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                        <div class="flex justify-center">
-                                            <div class="button-b" title="Cliquez ici pour modifier l'article">
-                                                <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
-                                                    <p class="button-brown">Modifier l'article</p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
+                                                <div class="button-b" title="Cliquez ici pour modifier l'article">
+                                                    <button class="button-brown">Modifier l'article</button>
 
-                                            <div class="flex justify-center">
-                                                <div class="button-b" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
-                                                        <p class="button-brown">Supprimer l'article</p>
-                                                    </a>
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
+                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
+                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
-                                            </div>
+                                            </form>
+
+                                            <form action="index.php?action=deletePost" method="post" class="flex justify-center">
+                                                <div class="button-b" title="Cliquez ici pour supprimer l'article">
+                                                    <button class="button-brown">Supprimer l'article</button>
+
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
+                                                </div>
+                                            </form>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -76,7 +83,7 @@
                  </div>
              </div>
 
-            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+            <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true):?>
                 <div class="flex justify-center -skew-y-3">
                     <div class="button-add-php" title="Cliquez ici pour ajouter un article">
                         <a href="index.php?action=addPost&id=<?= urlencode($category->identifier) ?>">
@@ -110,37 +117,44 @@
                                         <p class="text-blue"><?= htmlspecialchars($post->frenchCreationDate)?></p>
 
                                         <div class="flex justify-center">
-                                            <img src="./img/blog/<?= $post->picture ?>" alt="" class="w-64">
+                                            <img src="<?= $post->picture ?>" alt="" class="w-64">
                                         </div>
 
                                         <h1 class="subtitle"><?= htmlspecialchars($post->title)?></h1>
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <div class="flex justify-center">
+                                        <form action="index.php?action=post" method="post" class="flex justify-center">
                                             <div class="button-bl" title="Cliquez ici pour découvrir l'article">
-                                                <a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">
-                                                    <p class="button-blue">Lire l'article</p>
-                                                </a>
+                                                <button class="button-blue">Lire l'article</button>
+
+                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </div>
+                                        </form>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                            <div class="flex justify-center">
+                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour modifier l'article">
-                                                    <a href="index.php?action=updatePost&id=<?= urlencode($post->identifier) ?>">
-                                                        <p class="button-blue">Modifier l'article</p>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                                    <button class="button-blue">Modifier l'article</button>
 
-                                            <div class="flex justify-center">
-                                                <div class="button-bl" title="Cliquez ici pour supprimer l'article">
-                                                    <a href="index.php?action=deletePost&id=<?= urlencode($post->identifier) ?>">
-                                                        <p class="button-blue">Supprimer l'article</p>
-                                                    </a>
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
+                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
+                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
-                                            </div>
+                                            </form>
+
+                                            <form action="index.php?action=deletePost" method="post" class="flex justify-center">
+                                                <div class="button-bl" title="Cliquez ici pour supprimer l'article">
+                                                    <button class="button-blue">Supprimer l'article</button>
+
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
+                                                </div>
+                                            </form>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -150,7 +164,7 @@
                 </div>
             </div>
 
-            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+            <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true):?>
                 <div class="flex justify-center -skew-y-3">
                     <div class="button-add-js" title="Cliquez ici pour ajouter un article">
                         <a href="index.php?action=addPost&id=<?= urlencode($category->identifier)?>">

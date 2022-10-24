@@ -17,29 +17,25 @@ use Application\Controllers\User\UpdateUser;
 use Application\Controllers\User\DeleteUser;
 use Application\Controllers\Comment\CheckComment;
 use Application\Controllers\Comment\DeleteComment;
+use Application\Lib\DatabaseConnection;
 use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
 use Application\Controllers\MailerController;
+use Application\Model\Repository\PostRepository;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
+            if (isset($_POST['identifier']) && $_POST['identifier'] > 0) {
+                $identifier = $_POST['identifier'];
 
                 (new Post())->execute($identifier);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] === 'category') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                (new Category())->execute();
-            } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
-        } elseif ($_GET['action'] === 'dashboard') {
+        } elseif ($_GET['action'] === 'dashboard' && isset($_SESSION['LOGGED_USER_IS_ADMIN']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true) {
             (new Dashboard())->execute();
         } elseif ($_GET['action'] === 'updateUser') {
             (new UpdateUser())->execute();
@@ -51,12 +47,26 @@ try {
             (new DeleteComment())->execute();
         } elseif ($_GET['action'] === 'posts') {
             (new Posts())->execute();
-        } elseif ($_GET['action'] === 'addPost') {
+        } elseif ($_GET['action'] === 'addPost' && isset($_SESSION['LOGGED_USER'])) {
             (new AddPost())->execute();
-        } elseif ($_GET['action'] === 'updatePost') {
-            (new UpdatePost())->execute();
-        } elseif ($_GET['action'] === 'deletePost') {
-            (new DeletePost())->execute();
+        } elseif ($_GET['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
+            $connection = new DatabaseConnection();
+            $postRepository = new PostRepository($connection);
+            $post = $postRepository->getPost($_POST['identifier']);
+
+            if($_SESSION['LOGGED_USER_ID'] === $post->author) {
+                (new UpdatePost())->execute();
+            }
+        } elseif ($_GET['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
+            $connection = new DatabaseConnection();
+            $postRepository = new PostRepository($connection);
+            $post = $postRepository->getPost($_POST['identifier']);
+
+            if($_SESSION['LOGGED_USER_ID'] === $post->author){
+                (new DeletePost())->execute();
+            } else {
+                throw new Exception('Vous n\'avez pas les droits pour accéder à cette page.');
+            }
         } elseif ($_GET['action'] === 'contact') {
             (new MailerController())->execute();
         } elseif ($_GET['action'] === 'submitContact') {
@@ -65,10 +75,10 @@ try {
             (new Login())->execute();
         } elseif ($_GET['action'] === 'signup') {
             (new SignUp())->execute();
-        } elseif ($_GET['action'] === 'logout') {
+        } elseif ($_GET['action'] === 'logout' && isset($_SESSION['LOGGED_USER'])) {
             (new Logout())->execute();
         } else {
-            throw new Exception('La page que vous recherchez n\'existe pas');
+            throw new Exception('La page que vous recherchez n\'existe pas !');
         }
     } else {
         (new Homepage())->execute();
@@ -77,4 +87,8 @@ try {
     $errorMessage = $e->getMessage();
 
     require ('templates/error.php');
+}
+
+if(!isset($_SESSION['token'])) {
+    $_SESSION['token'] = md5(time()*random_int(175, 658));
 }

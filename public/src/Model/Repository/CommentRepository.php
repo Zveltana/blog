@@ -74,7 +74,7 @@ class CommentRepository
         INSERT INTO comments(post_id, user_id, comment, comment_date) VALUES(?, ?, ?, NOW())
         ");
 
-        $affectedLines = $statement->execute([$post, $author, $comment]);
+        $affectedLines = $statement->execute([strip_tags($post), strip_tags($author), strip_tags($comment)]);
 
         return ($affectedLines > 0);
     }
@@ -86,6 +86,16 @@ class CommentRepository
 
         $statement->execute([
             'id' => $identifier,
+        ]);
+    }
+
+    public function deleteCommentByPost (string $post): void {
+        $statement = $this->connection->getConnection()->prepare(
+            'DELETE FROM comments WHERE post_id = :post_id'
+        );
+
+        $statement->execute([
+            'post_id' => $post,
         ]);
     }
 

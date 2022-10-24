@@ -30,6 +30,9 @@
                             <?php if (!empty($errors['email'])): ?>
                                 <span class="error main-text text-brown font-semibold"><?= $errors['email']?></span>
                             <?php endif; ?>
+                            <?php if (!empty($errors['incorrect-email'])): ?>
+                                <span class="error main-text text-brown font-semibold"><?= $errors['incorrect-email']?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
 
