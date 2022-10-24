@@ -2,6 +2,7 @@
 
 namespace Application\Controllers;
 
+use Application\Lib\Redirect;
 use Application\Model\Repository\PostRepository;
 use Application\Lib\DatabaseConnection;
 use Application\Model\Repository\UsersRepository;
@@ -35,6 +36,7 @@ class AddPost
             }
 
             if (count($errors) === 0) {
+                $redirection = new Redirect();
                 $title = strip_tags($_POST['title']);
                 $description = strip_tags($_POST['description']);
                 $content = strip_tags($_POST['content']);
@@ -63,7 +65,7 @@ class AddPost
                     $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter l\'article !');
                 } else {
                     $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
-                    header('Location: index.php?action=posts');
+                    $redirection->execute('index.php?action=posts');
                 }
             }
         }

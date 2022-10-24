@@ -83,7 +83,7 @@
                  </div>
              </div>
 
-            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+            <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true):?>
                 <div class="flex justify-center -skew-y-3">
                     <div class="button-add-php" title="Cliquez ici pour ajouter un article">
                         <a href="index.php?action=addPost&id=<?= urlencode($category->identifier) ?>">
@@ -164,7 +164,7 @@
                 </div>
             </div>
 
-            <?php if(isset($_SESSION['LOGGED_USER'])):?>
+            <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true):?>
                 <div class="flex justify-center -skew-y-3">
                     <div class="button-add-js" title="Cliquez ici pour ajouter un article">
                         <a href="index.php?action=addPost&id=<?= urlencode($category->identifier)?>">
