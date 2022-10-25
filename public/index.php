@@ -3,13 +3,12 @@
 require ('vendor/autoload.php');
 
 use Application\Controllers\Homepage;
-use Application\Controllers\Post;
-use Application\Controllers\Posts;
-use Application\Controllers\UpdatePost;
-use Application\Controllers\DeletePost;
-use Application\Controllers\Category;
+use Application\Controllers\Post\Post;
+use Application\Controllers\Post\Posts;
+use Application\Controllers\Post\AddPost;
+use Application\Controllers\Post\UpdatePost;
+use Application\Controllers\Post\DeletePost;
 use Application\Controllers\Dashboard;
-use Application\Controllers\AddPost;
 use Application\Controllers\submitContact;
 use Application\Controllers\User\SignUp;
 use Application\Controllers\User\Login;
@@ -18,12 +17,9 @@ use Application\Controllers\User\DeleteUser;
 use Application\Controllers\Comment\CheckComment;
 use Application\Controllers\Comment\DeleteComment;
 use Application\Lib\DatabaseConnection;
-use Application\Lib\Redirect;
 use Application\Controllers\User\Logout;
 use Application\Controllers\MailerController;
 use Application\Model\Repository\PostRepository;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {

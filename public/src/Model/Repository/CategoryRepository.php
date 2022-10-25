@@ -7,7 +7,12 @@ use Application\Lib\DatabaseConnection;
 
 class CategoryRepository
 {
-    public DatabaseConnection $connection;
+    private DatabaseConnection $connection;
+
+    public function __construct(DatabaseConnection $connection)
+    {
+        $this->connection = $connection;
+    }
 
     public function getCategories(): array
     {

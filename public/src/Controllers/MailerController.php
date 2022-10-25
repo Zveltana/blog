@@ -3,7 +3,6 @@
 namespace Application\Controllers;
 
 use Application\Lib\Mailer;
-use Application\Lib\Redirect;
 use Symfony\Component\Mime\Address;
 
 class MailerController
@@ -44,8 +43,8 @@ class MailerController
                         nl2br(htmlspecialchars($_POST['content'])),
                     );
 
-                    $redirect = new Redirect();
-                    $redirect->execute('index.php?action=submitContact');
+                    $controllers = new Controllers();
+                    $controllers->redirection()->execute('index.php?action=submitContact');
                 }
             }
         }

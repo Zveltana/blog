@@ -61,7 +61,7 @@ ob_start(); ?>
 
             <div class="mb-3 main-text space-y-2 flex flex-col">
                 <label for="comment" class="form-label">Commentaire</label>
-                <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+                <textarea class="form-control <?php if($category->name === 'PHP'): ?>bg-brown<?php else: ?>bg-blue<?php endif;?>" id="comment" name="comment" rows="5"></textarea>
                 <?php if (!empty($errors['comment'])): ?>
                     <span class="error main-text <?php if($category->name === 'PHP'): ?>text-brown<?php else: ?>text-blue<?php endif;?> font-semibold"><?= $errors['comment']?></span>
                 <?php endif; ?>

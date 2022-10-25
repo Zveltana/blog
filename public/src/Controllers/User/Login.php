@@ -2,24 +2,21 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\UsersRepository;
+use Application\Controllers\Controllers;
 use Application\Lib\Redirect;
-use Application\Model\User;
 
 class Login
 {
     public function execute(): void
     {
-        if(isset($_SESSION['LOGGED_USER'])){
-            $redirection = new Redirect();
-            $redirection->execute('index.php');
-        }
-
-        $connection = new DatabaseConnection();
-        $usersRepository = new UsersRepository($connection);
+        $controllers = new Controllers();
+        $controllers->userRepository();
 
         $errors = [];
+
+        if(isset($_SESSION['LOGGED_USER'])){
+            $controllers->redirection()->execute('index.php');
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
@@ -33,7 +30,7 @@ class Login
             }
 
             if (count($errors) === 0) {
-                $user = $usersRepository->getUserByEmail($postData['email']);
+                $user = $controllers->userRepository()->getUserByEmail($postData['email']);
 
                 $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
 
@@ -44,7 +41,7 @@ class Login
                     $_SESSION['LOGGED_USER_IS_ADMIN'] = $user->getIsAdmin();
 
 
-                    $redirection->execute('index.php');
+                    $controllers->redirection()->execute('index.php');
                 }
             }
         }

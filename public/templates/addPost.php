@@ -45,6 +45,9 @@
                     <?php if (!empty($errors['picture'])): ?>
                         <span class="error main-text text-brown font-semibold"><?= $errors['picture']?></span>
                     <?php endif; ?>
+                    <?php if (!empty($message['verify_picture'])): ?>
+                        <span class="error main-text text-brown font-semibold"><?= $message['verify_picture']?></span>
+                    <?php endif; ?>
                 </div>
 
                 <div class="flex justify-center">

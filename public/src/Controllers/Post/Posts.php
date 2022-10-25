@@ -1,9 +1,11 @@
 <?php
+namespace Application\Controllers\Post;
 
-namespace Application\Controllers;
+use Application\Controllers\Controllers;
 
-class Category {
-    function execute()
+class Posts
+{
+    public function execute()
     {
         $controllers = new Controllers();
 
@@ -11,8 +13,8 @@ class Category {
         $categories = $controllers->categoriesRepository()->getCategories();
 
         $controllers->postRepository();
-        $post = $controllers->postRepository()->getPosts();
+        $posts = $controllers->postRepository()->getPosts();
 
-        require('templates/homepage.php');
+        require('templates/posts.php');
     }
 }

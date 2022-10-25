@@ -1,25 +1,21 @@
 <?php
 namespace Application\Controllers\User;
 
-use Application\Lib\DatabaseConnection;
-use Application\Lib\Redirect;
-use Application\Model\Repository\UsersRepository;
+use Application\Controllers\Controllers;
 use Application\Model\User;
 
 class SignUp
 {
     public function execute(): void
     {
-        if(isset($_SESSION['loggedUser'])){
-            $redirection = new Redirect();
-            $redirection->execute('index.php');
-        }
-
-        $connection = new DatabaseConnection();
-
-        $usersRepository = new UsersRepository($connection);
+        $controllers = new Controllers();
+        $controllers->userRepository();
 
         $errors = [];
+
+        if(isset($_SESSION['loggedUser'])){
+            $controllers->redirection()->execute('index.php');
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
@@ -40,24 +36,23 @@ class SignUp
                 $errors['password'] = 'Veuillez remplir ce champ.';
             }
 
-            $user = $usersRepository->getUserByEmail($postData['email']);
+            $user = $controllers->userRepository()->getUserByEmail($postData['email']);
 
             if ($user !== null){
                 $errorMessage = sprintf('L\'email inscrit existe déjà.');
             }
 
             if (count($errors) === 0 && $user === null) {
-                $redirection = new Redirect();
                 $user = new User();
                 $user->setFullName(strip_tags($postData['fullName']));
                 $user->setEmail($postData['email']);
                 $user->setPassword($postData['password']);
-                $createUser = $usersRepository->createUser($user);
+                $createUser = $controllers->userRepository()->createUser($user);
 
                 $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
                 $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
-                $redirection->execute('index.php');
+                $controllers->redirection()->execute('index.php');
             }
         }
 

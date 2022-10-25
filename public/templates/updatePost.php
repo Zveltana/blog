@@ -1,4 +1,4 @@
-<?php $title = 'Update Post'; ?>
+<?php $title = 'Update Article'; ?>
 
 <?php ob_start();?>
     <section class="width height">
@@ -38,6 +38,10 @@
                     </div>
                     <input type="file" id="picture" class="form-control" name="picture" value="<?= $post->picture ?>">
                 </div>
+
+                <?php if (!empty($message['verify_picture'])): ?>
+                    <span class="error main-text text-brown font-semibold"><?= $message['verify_picture']?></span>
+                <?php endif; ?>
 
                 <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 

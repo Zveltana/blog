@@ -2,11 +2,11 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\Redirect;
+use Application\Controllers\Controllers;
 
 class Logout {
     public function execute(){
-        $redirection = new Redirect();
+        $controllers = new Controllers();
         session_destroy();
 
         setcookie(
@@ -15,6 +15,6 @@ class Logout {
             -1
         );
 
-        $redirection->execute('index.php');
+        $controllers->redirection()->execute('index.php');
     }
 }
