@@ -3,17 +3,18 @@
 namespace Application\Controllers\Post;
 
 use Application\Model\Repository\UsersRepository;
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class AddPost
 {
     public function execute(): void
     {
-        $controllers = new Controllers();
+        $container = new Container();
 
-        $controllers->getPosts();
+        $posts = $container->postRepository();
+        $posts->getPosts();
 
-        $usersRepository = new UsersRepository($controllers->connection());
+        $usersRepository = new UsersRepository($container->connection());
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $errors = [];
@@ -35,18 +36,24 @@ class AddPost
             if (count($errors) === 0) {
                 $message = [];
 
-                $controllers->verify_picture();
+                $picture = $container->pictureVerifier()->verify();
 
-                if ($controllers->verify_picture() === array()) {
+                if ($picture === array()) {
                     $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
                 } else {
-                    $success = $controllers->createPost();
+                    $title = strip_tags($_POST['title']);
+                    $author = $_SESSION['LOGGED_USER_ID'];
+                    $description = strip_tags($_POST['description']);
+                    $content = strip_tags($_POST['content']);
+                    $category = $_GET['id'];
+
+                    $success = $posts->createPost($title, $author, $description, $content, $picture, $category);
 
                     if (!$success) {
                         $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter l\'article !');
                     } else {
                         $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
-                        $controllers->redirection()->execute('index.php?action=posts');
+                        $container->redirection()->execute('index.php?action=posts');
                     }
                 }
             }

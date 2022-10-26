@@ -1,20 +1,20 @@
 <?php
 namespace Application\Controllers\User;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 use Application\Model\User;
 
 class SignUp
 {
     public function execute(): void
     {
-        $controllers = new Controllers();
-        $controllers->userRepository();
+        $container = new Container();
+        $container->userRepository();
 
         $errors = [];
 
         if(isset($_SESSION['loggedUser'])){
-            $controllers->redirection()->execute('index.php');
+            $container->redirection()->execute('index.php');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -36,7 +36,7 @@ class SignUp
                 $errors['password'] = 'Veuillez remplir ce champ.';
             }
 
-            $user = $controllers->userRepository()->getUserByEmail($postData['email']);
+            $user = $container->userRepository()->getUserByEmail($postData['email']);
 
             if ($user !== null){
                 $errorMessage = sprintf('L\'email inscrit existe déjà.');
@@ -47,12 +47,12 @@ class SignUp
                 $user->setFullName(strip_tags($postData['fullName']));
                 $user->setEmail($postData['email']);
                 $user->setPassword($postData['password']);
-                $createUser = $controllers->userRepository()->createUser($user);
+                $createUser = $container->userRepository()->createUser($user);
 
                 $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
                 $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
-                $controllers->redirection()->execute('index.php');
+                $container->redirection()->execute('index.php');
             }
         }
 

@@ -2,23 +2,23 @@
 
 namespace Application\Controllers\Comment;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class DeleteComment
 {
     public function execute(): void
     {
-            $controllers = new Controllers();
-            $controllers->userRepository();
-            $controllers->postRepository();
-            $post = $controllers->getPosts();
-            $controllers->commentRepository();
-            $comments = $controllers->commentRepository()->getComments();
+            $container = new Container();
+            $container->userRepository();
+            $container->postRepository();
+            $post = $container->postRepository()->getPosts();
+            $container->commentRepository();
+            $comments = $container->commentRepository()->getComments();
 
 
-            $controllers->commentRepository()->deleteComment($_GET['id']);
+            $container->commentRepository()->deleteComment($_GET['id']);
 
-            $controllers->redirection()->execute('index.php?action=dashboard');
+            $container->redirection()->execute('index.php?action=dashboard');
     }
 }
 

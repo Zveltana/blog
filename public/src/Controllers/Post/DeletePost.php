@@ -2,32 +2,32 @@
 
 namespace Application\Controllers\Post;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 use Exception;
 
 class DeletePost
 {
     public function execute(): void
     {
-        $controllers = new Controllers();
+        $container = new Container();
 
-        $controllers->postRepository();
-        $controllers->userRepository();
-        $controllers->commentRepository();
+        $container->postRepository();
+        $container->userRepository();
+        $container->commentRepository();
 
         if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
 
 
-            $post = $controllers->postRepository()->getPostById($_POST['identifier']);
+            $post = $container->postRepository()->getPostById($_POST['identifier']);
 
-            $controllers->commentRepository()->deleteCommentByPost($_POST['identifier']);
-            $controllers->postRepository()->deletePost($_POST['identifier']);
+            $container->commentRepository()->deleteCommentByPost($_POST['identifier']);
+            $container->postRepository()->deletePost($_POST['identifier']);
 
             if (file_exists($post->picture)) {
                 unlink($post->picture);
             }
 
-            $controllers->redirection()->execute('index.php?action=posts');
+            $container->redirection()->execute('index.php?action=posts');
         } else {
             throw new Exception('Jeton de sécurité périmé');
         }

@@ -2,11 +2,11 @@
 
 namespace Application\Controllers\User;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class Logout {
     public function execute(){
-        $controllers = new Controllers();
+        $container = new Container();
 
         session_destroy();
 
@@ -16,6 +16,6 @@ class Logout {
             -1
         );
 
-        $controllers->redirection()->execute($_SERVER['HTTP_REFERER']);
+        $container->redirection()->execute($_SERVER['HTTP_REFERER']);
     }
 }

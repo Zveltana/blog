@@ -2,21 +2,21 @@
 
 namespace Application\Controllers\User;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class DeleteUser
 {
     public function execute(): void
     {
-        $controllers = new Controllers();
-        $controllers->userRepository();
+        $container = new Container();
+        $container->userRepository();
 
-        $user = $controllers->userRepository()->getUsers();
+        $user = $container->userRepository()->getUsers();
 
 
-        $controllers->userRepository()->deleteUser($_GET['id']);
+        $container->userRepository()->deleteUser($_GET['id']);
 
-        $controllers->redirection()->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }
 

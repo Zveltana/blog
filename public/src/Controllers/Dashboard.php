@@ -2,20 +2,22 @@
 
 namespace Application\Controllers;
 
+use Application\Common\Container;
+
 class Dashboard
 {
     function execute(): void
     {
-        $controllers = new Controllers();
+        $container = new Container();
 
-        $controllers->userRepository();
-        $users = $controllers->userRepository()->getUsers();
+        $container->userRepository();
+        $users = $container->userRepository()->getUsers();
 
-        $controllers->postRepository();
-        $posts = $controllers->postRepository()->getPosts();
+        $container->postRepository();
+        $posts = $container->postRepository()->getPosts();
 
-        $controllers->commentRepository();
-        $comments = $controllers->commentRepository()->getComments();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
 
         require('templates/dashboard.php');
     }

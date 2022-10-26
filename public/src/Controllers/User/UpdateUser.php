@@ -2,22 +2,22 @@
 
 namespace Application\Controllers\User;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class UpdateUser
 {
     function execute() {
         $postData = $_POST;
-        $controllers = new Controllers();
-        $controllers->userRepository();
-        $users = $controllers->userRepository()->getUsers();
+        $container = new Container();
+        $container->userRepository();
+        $users = $container->userRepository()->getUsers();
 
         if ($postData['status']) {
-            $user = $controllers->userRepository()->getUserById($_GET['id']);
+            $user = $container->userRepository()->getUserById($_GET['id']);
             $user->setIsAdmin(true);
-            $controllers->userRepository()->updateUser($user);
+            $container->userRepository()->updateUser($user);
 
         }
-        $controllers->redirection()->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }

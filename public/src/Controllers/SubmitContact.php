@@ -2,9 +2,9 @@
 
 namespace Application\Controllers;
 
-class submitContact
+class SubmitContact
 {
     public function execute(): void {
-        require('templates/submitContact.php');
+        require('templates/SubmitContact.php');
     }
 }

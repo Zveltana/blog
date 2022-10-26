@@ -2,25 +2,25 @@
 
 namespace Application\Controllers\Post;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class Post
 {
     function execute(string $identifier): void
     {
-        $controllers = new Controllers();
+        $container = new Container();
 
-        $controllers->postRepository();
-        $post = $controllers->postRepository()->getPost($identifier);
+        $container->postRepository();
+        $post = $container->postRepository()->getPost($identifier);
 
-        $controllers->userRepository();
-        $user = $controllers->userRepository()->getUserById($post->author);
+        $container->userRepository();
+        $user = $container->userRepository()->getUserById($post->author);
 
-        $controllers->commentRepository();
-        $comments = $controllers->commentRepository()->getCommentsByPost($identifier);
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getCommentsByPost($identifier);
 
-        $controllers->categoriesRepository();
-        $category = $controllers->categoriesRepository()->getCategoryById($post->categoryId);
+        $container->categoriesRepository();
+        $category = $container->categoriesRepository()->getCategoryById($post->categoryId);
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
@@ -34,7 +34,7 @@ class Post
                 $comment = htmlspecialchars($_POST['comment'], ENT_COMPAT);
 
                 if (count($errors) === 0) {
-                    $success = $controllers->commentRepository()->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
+                    $success = $container->commentRepository()->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
 
                     if (!$success) {
                         $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');

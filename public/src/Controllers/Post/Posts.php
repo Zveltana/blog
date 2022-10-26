@@ -1,19 +1,19 @@
 <?php
 namespace Application\Controllers\Post;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class Posts
 {
     public function execute()
     {
-        $controllers = new Controllers();
+        $container = new Container();
 
-        $controllers->categoriesRepository();
-        $categories = $controllers->categoriesRepository()->getCategories();
+        $container->categoriesRepository();
+        $categories = $container->categoriesRepository()->getCategories();
 
-        $controllers->postRepository();
-        $posts = $controllers->postRepository()->getPosts();
+        $container->postRepository();
+        $posts = $container->postRepository()->getPosts();
 
         require('templates/posts.php');
     }

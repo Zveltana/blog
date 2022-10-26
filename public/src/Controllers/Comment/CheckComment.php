@@ -2,22 +2,22 @@
 
 namespace Application\Controllers\Comment;
 
-use Application\Controllers\Controllers;
+use Application\Common\Container;
 
 class CheckComment
 {
     function execute() {
-        $controllers = new Controllers();
-        $controllers->userRepository();
-        $controllers->postRepository();
-        $post = $controllers->postRepository()->getPosts();
-        $controllers->commentRepository();
-        $comments = $controllers->commentRepository()->getComments();
-        $controllers->redirection();
+        $container = new Container();
+        $container->userRepository();
+        $container->postRepository();
+        $post = $container->postRepository()->getPosts();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
+        $container->redirection();
 
 
-        $controllers->commentRepository()->checkComment($_GET['id']);
+        $container->commentRepository()->checkComment($_GET['id']);
 
-        $controllers->redirection()->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }

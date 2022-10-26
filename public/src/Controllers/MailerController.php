@@ -2,6 +2,7 @@
 
 namespace Application\Controllers;
 
+use Application\Common\Container;
 use Application\Lib\Mailer;
 use Symfony\Component\Mime\Address;
 
@@ -43,8 +44,8 @@ class MailerController
                         nl2br(htmlspecialchars($_POST['content'])),
                     );
 
-                    $controllers = new Controllers();
-                    $controllers->redirection()->execute('index.php?action=submitContact');
+                    $container = new Container();
+                    $container->redirection()->execute('index.php?action=submitContact');
                 }
             }
         }
