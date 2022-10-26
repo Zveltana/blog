@@ -2,6 +2,7 @@
 
 require ('vendor/autoload.php');
 
+use Application\Controllers\Controllers;
 use Application\Controllers\Homepage;
 use Application\Controllers\Post\Post;
 use Application\Controllers\Post\Posts;
@@ -22,6 +23,9 @@ use Application\Controllers\MailerController;
 use Application\Model\Repository\PostRepository;
 
 try {
+    $controllers = new Controllers;
+    $controllers->postRepository();
+
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
             if (isset($_POST['identifier']) && $_POST['identifier'] > 0) {
@@ -46,17 +50,13 @@ try {
         } elseif ($_GET['action'] === 'addPost' && isset($_SESSION['LOGGED_USER'])) {
             (new AddPost())->execute();
         } elseif ($_GET['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
-            $connection = new DatabaseConnection();
-            $postRepository = new PostRepository($connection);
-            $post = $postRepository->getPost($_POST['identifier']);
+            $post = $controllers->postRepository()->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author) {
                 (new UpdatePost())->execute();
             }
         } elseif ($_GET['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
-            $connection = new DatabaseConnection();
-            $postRepository = new PostRepository($connection);
-            $post = $postRepository->getPost($_POST['identifier']);
+            $post = $controllers->postRepository()->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author){
                 (new DeletePost())->execute();

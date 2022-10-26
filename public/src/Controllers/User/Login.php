@@ -35,7 +35,6 @@ class Login
                 $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
 
                 if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
-                    $redirection = new Redirect();
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
                     $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
                     $_SESSION['LOGGED_USER_IS_ADMIN'] = $user->getIsAdmin();

@@ -18,7 +18,7 @@
             <div class="mb-3">
                 <div class="space-y-2 flex flex-col">
                     <label for="email" class="form-label main-text">Email</label>
-                    <input type="email" class="form-control main-text" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
+                    <input type="email" class="form-control main-text" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com" value="<?php if($_POST) echo strip_tags($_POST['email']); ?>">
                     <?php if (!empty($errors['email'])): ?>
                         <span class="error main-text text-brown font-semibold"><?= $errors['email']?></span>
                     <?php endif; ?>

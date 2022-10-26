@@ -17,7 +17,7 @@
 
                     <div class="mb-3 main-text space-y-2 flex flex-col">
                         <label for="fullName" class="form-label">Nom complet</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName">
+                        <input type="text" class="form-control" id="fullName" name="fullName" value="<?php if($_POST) echo strip_tags($_POST['fullName']); ?>">
                         <?php if (!empty($errors['fullName'])): ?>
                             <span class="error main-text text-brown font-semibold"><?= $errors['fullName']?></span>
                         <?php endif; ?>
@@ -26,7 +26,7 @@
                     <div class="mb-3">
                         <div class="space-y-2 flex flex-col">
                             <label for="email" class="form-label main-text">Email</label>
-                            <input type="email" class="form-control main-text" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
+                            <input type="email" class="form-control main-text" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com" value="<?php if($_POST) echo strip_tags($_POST['email']); ?>">
                             <?php if (!empty($errors['email'])): ?>
                                 <span class="error main-text text-brown font-semibold"><?= $errors['email']?></span>
                             <?php endif; ?>

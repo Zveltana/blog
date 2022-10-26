@@ -7,6 +7,7 @@ use Application\Controllers\Controllers;
 class Logout {
     public function execute(){
         $controllers = new Controllers();
+
         session_destroy();
 
         setcookie(
@@ -15,6 +16,6 @@ class Logout {
             -1
         );
 
-        $controllers->redirection()->execute('index.php');
+        $controllers->redirection()->execute($_SERVER['HTTP_REFERER']);
     }
 }
