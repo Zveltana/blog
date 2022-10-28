@@ -10,7 +10,9 @@ class AddPost
     public function execute(): void
     {
         $server = $_SERVER;
-        $postdata = $_POST;
+        $postData = $_POST;
+        $session = $_SESSION;
+        $get = $_GET;
         $files = $_FILES;
         $container = new Container();
 
@@ -20,20 +22,22 @@ class AddPost
         if ('POST' === $server['REQUEST_METHOD']) {
             $errors = [];
             $title = null;
-            $comment = null;
 
             $fields = [
                 'title',
                 'description',
                 'content',
-                'picture',
             ];
 
             foreach ($fields as $field)
             {
-                if (empty($postdata[$field])) {
+                if (empty($postData[$field])) {
                     $errors[$field] = 'Veuillez remplir ce champ.';
                 }
+            }
+
+            if (empty($_FILES['picture']['name'])) {
+                $errors['picture'] = 'Veuillez remplir ce champ.';
             }
 
             if (count($errors) === 0) {
@@ -44,13 +48,13 @@ class AddPost
                 if ($picture === array()) {
                     $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
                 } else {
-                    $title = strip_tags($_POST['title']);
-                    $author = $_SESSION['LOGGED_USER_ID'];
-                    $description = strip_tags($_POST['description']);
-                    $content = strip_tags($_POST['content']);
-                    $category = $_GET['id'];
+                    $title = strip_tags($postData['title']);
+                    $author = $session['LOGGED_USER_ID'];
+                    $description = strip_tags($postData['description']);
+                    $content = strip_tags($postData['content']);
+                    $category = $get['id'];
 
-                    $success = $posts->createPost($title, $author, $description, $content, $picture, $category);
+                    $posts->createPost($title, $author, $description, $content, $picture, $category);
 
                     $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
                     $container->redirection()->execute('index.php?action=posts');

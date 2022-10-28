@@ -31,7 +31,7 @@ class SignUp
 
             foreach ($fields as $field)
             {
-                if (empty($postdata[$field])) {
+                if (empty($postData[$field])) {
                     $errors[$field] = 'Veuillez remplir ce champ.';
                 }
             }
@@ -52,6 +52,8 @@ class SignUp
                 $user->setEmail($postData['email']);
                 $user->setPassword($postData['password']);
                 $createUser = $container->userRepository()->createUser($user);
+                $user = $container->userRepository()->getUserByEmail($postData['email']);
+
 
                 $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
                 $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();

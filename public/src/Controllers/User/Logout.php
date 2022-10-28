@@ -10,12 +10,6 @@ class Logout {
 
         session_destroy();
 
-        setcookie(
-            'LOGGED_USER',
-            null,
-            -1
-        );
-
         $container->redirection()->execute('index.php');
     }
 }

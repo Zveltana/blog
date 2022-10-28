@@ -29,7 +29,7 @@ class Login
 
             foreach ($fields as $field)
             {
-                if (empty($postdata[$field])) {
+                if (empty($postData[$field])) {
                     $errors[$field] = 'Veuillez remplir ce champ.';
                 }
             }
