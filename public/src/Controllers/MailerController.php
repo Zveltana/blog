@@ -10,43 +10,38 @@ class MailerController
 {
     public function execute(): void
     {
-        if ('POST' === $_SERVER['REQUEST_METHOD']) {
-            if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
+        $session = $_SESSION;
+        $server = $_SERVER;
+        $postData = $_POST;
 
-                $postData = $_POST;
+        if (('POST' === $server['REQUEST_METHOD']) && isset($postData['token']) && $postData['token'] === $session['token']) {
 
-                $errors = [];
+            $errors = [];
 
-                if (empty($postData['firstName'])) {
-                    $errors['firstName'] = 'Veuillez remplir ce champ.';
+            $fields = [
+                'firstName',
+                'lastName',
+                'email',
+                'subject',
+                'content',
+            ];
+
+            foreach ($fields as $field)
+            {
+                if (empty($postdata[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
                 }
+            }
 
-                if (empty($postData['lastName'])) {
-                    $errors['lastName'] = 'Veuillez remplir ce champ.';
-                }
+            if (count($errors) === 0) {
+                (new Mailer())->send(
+                    new Address(htmlspecialchars($postData['email']), htmlspecialchars($postData['firstName'])),
+                    htmlspecialchars($postData['subject']),
+                    nl2br(htmlspecialchars($postData['content'])),
+                );
 
-                if (empty($postData['email'])) {
-                    $errors['email'] = 'Veuillez remplir ce champ.';
-                }
-
-                if (empty($postData['subject'])) {
-                    $errors['subject'] = 'Veuillez remplir ce champ.';
-                }
-
-                if (empty($postData['content'])) {
-                    $errors['content'] = 'Veuillez remplir ce champ.';
-                }
-
-                if (count($errors) === 0) {
-                    (new Mailer())->send(
-                        new Address(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['firstName'])),
-                        htmlspecialchars($_POST['subject']),
-                        nl2br(htmlspecialchars($_POST['content'])),
-                    );
-
-                    $container = new Container();
-                    $container->redirection()->execute('index.php?action=submitContact');
-                }
+                $container = new Container();
+                $container->redirection()->execute('index.php?action=submitContact');
             }
         }
 

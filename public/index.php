@@ -21,6 +21,7 @@ use Application\Controllers\User\Logout;
 use Application\Controllers\MailerController;
 
 try {
+    $get = $_GET;
     $container = new Container;
     $container->postRepository();
 
@@ -36,10 +37,10 @@ try {
         'signup' => SignUp::class,
     ];
 
-    if (isset($_GET['action']) && $_GET['action'] !== '') {
-        if (array_key_exists($_GET['action'], $array)) {
-            (new $array[$_GET['action']])->execute();
-        } elseif ($_GET['action'] === 'post') {
+    if (isset($get['action']) && $get['action'] !== '') {
+        if (array_key_exists($get['action'], $array)) {
+            (new $array[$get['action']])->execute();
+        } elseif ($get['action'] === 'post') {
             if (isset($_POST['identifier']) && $_POST['identifier'] > 0) {
                 $identifier = $_POST['identifier'];
 
@@ -47,17 +48,17 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] === 'dashboard' && isset($_SESSION['LOGGED_USER_IS_ADMIN']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true) {
+        } elseif ($get['action'] === 'dashboard' && isset($_SESSION['LOGGED_USER_IS_ADMIN']) && $_SESSION['LOGGED_USER_IS_ADMIN'] === true) {
             (new Dashboard())->execute();
-        } elseif ($_GET['action'] === 'addPost' && isset($_SESSION['LOGGED_USER'])) {
+        } elseif ($get['action'] === 'addPost' && isset($_SESSION['LOGGED_USER'])) {
             (new AddPost())->execute();
-        } elseif ($_GET['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
+        } elseif ($get['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
             $post = $container->postRepository()->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author) {
                 (new UpdatePost())->execute();
             }
-        } elseif ($_GET['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
+        } elseif ($get['action'] === 'deletePost' && isset($_SESSION['LOGGED_USER'])) {
             $post = $container->postRepository()->getPost($_POST['identifier']);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author){
@@ -65,7 +66,7 @@ try {
             } else {
                 throw new Exception('Vous n\'avez pas les droits pour accéder à cette page.');
             }
-        } elseif ($_GET['action'] === 'logout' && isset($_SESSION['LOGGED_USER'])) {
+        } elseif ($get['action'] === 'logout' && isset($_SESSION['LOGGED_USER'])) {
             (new Logout())->execute();
         } else {
             throw new Exception('La page que vous recherchez n\'existe pas !');

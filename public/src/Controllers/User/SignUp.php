@@ -8,32 +8,36 @@ class SignUp
 {
     public function execute(): void
     {
+        $session = $_SESSION;
+        $server = $_SERVER;
+
         $container = new Container();
         $container->userRepository();
 
         $errors = [];
 
-        if(isset($_SESSION['loggedUser'])){
+        if(isset($session['loggedUser'])){
             $container->redirection()->execute('index.php');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($server['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
 
-            if (empty($postData['fullName'])) {
-                $errors['fullName'] = 'Veuillez remplir ce champ.';
-            }
+            $fields = [
+                'fullName',
+                'email',
+                'password',
+            ];
 
-            if (empty($postData['email'])) {
-                $errors['email'] = 'Veuillez remplir ce champ.';
+            foreach ($fields as $field)
+            {
+                if (empty($postdata[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
+                }
             }
 
             if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
                 $errors['incorrect-email'] = 'Email incorrect.';
-            }
-
-            if (empty($postData['password'])) {
-                $errors['password'] = 'Veuillez remplir ce champ.';
             }
 
             $user = $container->userRepository()->getUserByEmail($postData['email']);
@@ -50,6 +54,7 @@ class SignUp
                 $createUser = $container->userRepository()->createUser($user);
 
                 $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
+                $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
                 $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
                 $container->redirection()->execute('index.php');

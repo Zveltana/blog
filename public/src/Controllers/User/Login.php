@@ -8,24 +8,30 @@ class Login
 {
     public function execute(): void
     {
+        $session = $_SESSION;
+
         $container = new Container();
         $container->userRepository();
 
         $errors = [];
 
-        if(isset($_SESSION['LOGGED_USER'])){
+        if(isset($session['LOGGED_USER'])){
             $container->redirection()->execute('index.php');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
 
-            if (empty($postData['email'])) {
-                $errors['email'] = 'Veuillez remplir ce champ.';
-            }
+            $fields = [
+                'email',
+                'password',
+            ];
 
-            if (empty($postData['password'])) {
-                $errors['password'] = 'Veuillez remplir ce champ.';
+            foreach ($fields as $field)
+            {
+                if (empty($postdata[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
+                }
             }
 
             if (count($errors) === 0) {

@@ -23,12 +23,14 @@ class Mailer
         string $subject,
         string $text,
     ): void {
+        $postData = $_POST;
+
         $email = (new Email())
             ->from($from)
             ->to('ameliamassot@gmail.com')
             ->subject($subject)
             ->text($text)
-            ->html('<h1>Nouveau mail de : <span style="color:#7d695c;">' . htmlspecialchars($_POST['firstName']) .' '. htmlspecialchars($_POST['lastName']) . '</span></h1><br><h2>Sujet : ' . htmlspecialchars($_POST['subject']) . '</h2><br><p>' . nl2br(htmlspecialchars($_POST['content'])) .'</p>');
+            ->html('<h1>Nouveau mail de : <span style="color:#7d695c;">' . htmlspecialchars($postData['firstName']) .' '. htmlspecialchars($postData['lastName']) . '</span></h1><br><h2>Sujet : ' . htmlspecialchars($postData['subject']) . '</h2><br><p>' . nl2br(htmlspecialchars($postData['content'])) .'</p>');
 
         $this->mailer->send($email);
     }

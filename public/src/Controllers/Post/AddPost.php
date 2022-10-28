@@ -9,28 +9,31 @@ class AddPost
 {
     public function execute(): void
     {
+        $server = $_SERVER;
+        $postdata = $_POST;
+        $files = $_FILES;
         $container = new Container();
 
         $posts = $container->postRepository();
         $posts->getPosts();
 
-        $usersRepository = new UsersRepository($container->connection());
-
-        if ('POST' === $_SERVER['REQUEST_METHOD']) {
+        if ('POST' === $server['REQUEST_METHOD']) {
             $errors = [];
             $title = null;
             $comment = null;
-            if (empty($_POST['title'])) {
-                $errors['title'] = 'Veuillez remplir ce champ.';
-            }
-            if (empty($_POST['description'])) {
-                $errors['description'] = 'Veuillez remplir ce champ.';
-            }
-            if (empty($_POST['content'])) {
-                $errors['content'] = 'Veuillez remplir ce champ.';
-            }
-            if (empty($_FILES['picture']['name'])) {
-                $errors['picture'] = 'Veuillez remplir ce champ.';
+
+            $fields = [
+                'title',
+                'description',
+                'content',
+                'picture',
+            ];
+
+            foreach ($fields as $field)
+            {
+                if (empty($postdata[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
+                }
             }
 
             if (count($errors) === 0) {
@@ -49,12 +52,8 @@ class AddPost
 
                     $success = $posts->createPost($title, $author, $description, $content, $picture, $category);
 
-                    if (!$success) {
-                        $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter l\'article !');
-                    } else {
-                        $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
-                        $container->redirection()->execute('index.php?action=posts');
-                    }
+                    $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
+                    $container->redirection()->execute('index.php?action=posts');
                 }
             }
         }

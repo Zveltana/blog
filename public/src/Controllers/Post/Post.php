@@ -8,6 +8,10 @@ class Post
 {
     function execute(string $identifier): void
     {
+        $server = $_SERVER;
+        $session = $_SESSION;
+        $postData = $_POST;
+
         $container = new Container();
 
         $container->postRepository();
@@ -22,26 +26,23 @@ class Post
         $container->categoriesRepository();
         $category = $container->categoriesRepository()->getCategoryById($post->categoryId);
 
-        if ('POST' === $_SERVER['REQUEST_METHOD']) {
-            if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
-                $errors = [];
-                $comment = null;
+        if (('POST' === $server['REQUEST_METHOD']) && isset($postData['token']) && $postData['token'] === $session['token']) {
+            $errors = [];
+            $comment = null;
 
-                if (empty($_POST['comment'])) {
-                    $errors['comment'] = 'Veuillez remplir ce champ.';
+            if (empty($postData['comment'])) {
+                $errors['comment'] = 'Veuillez remplir ce champ.';
+            }
+
+            $comment = htmlspecialchars($postData['comment'], ENT_COMPAT);
+
+            if (count($errors) === 0) {
+                $success = $container->commentRepository()->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
+
+                if (!$success) {
+                    $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
                 }
-
-                $comment = htmlspecialchars($_POST['comment'], ENT_COMPAT);
-
-                if (count($errors) === 0) {
-                    $success = $container->commentRepository()->createComment($identifier, $_SESSION['LOGGED_USER_ID'], $comment);
-
-                    if (!$success) {
-                        $errorMessage = sprintf('Les informations envoyées ne permettent pas d\'ajouter le commentaire!');
-                    } else {
-                        $message = sprintf('Votre commentaire est en attente de validation par un administrateur.');
-                    }
-                }
+                $message = sprintf('Votre commentaire est en attente de validation par un administrateur.');
             }
         }
         require('templates/post.php');

@@ -8,13 +8,14 @@ class DeleteUser
 {
     public function execute(): void
     {
+        $get = $_GET;
         $container = new Container();
         $container->userRepository();
 
         $user = $container->userRepository()->getUsers();
 
 
-        $container->userRepository()->deleteUser($_GET['id']);
+        $container->userRepository()->deleteUser($get['id']);
 
         $container->redirection()->execute('index.php?action=dashboard');
     }

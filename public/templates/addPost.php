@@ -1,6 +1,7 @@
 <?php $title = 'Ajouter un article'; ?>
 
 <?php ob_start();?>
+    <?php $postData = $_POST;?>
     <section class="width height">
         <h1 class="title mb-20">Ajouter un article de blog</h1>
 
@@ -15,7 +16,9 @@
 
                 <div class="mb-3 main-text space-y-2 flex flex-col">
                     <label for="title" class="form-label">Titre</label>
-                    <input type="text" class="form-control" id="title" name="title" value="<?php if($_POST) echo strip_tags($_POST['title']); ?>">
+                    <input type="text" class="form-control" id="title" name="title" value="<?php if($postData) {
+                        echo strip_tags($postData['title']);
+                    } ?>">
                     <?php if (!empty($errors['title'])): ?>
                         <span class="error main-text text-brown font-semibold"><?= $errors['title']?></span>
                     <?php endif; ?>
@@ -24,7 +27,9 @@
                 <div class="mb-3">
                     <div class="space-y-2 flex flex-col">
                         <label for="description" class="form-label main-text">Description</label>
-                        <input type="text" class="form-control main-text" id="description" name="description" value="<?php if($_POST) echo strip_tags($_POST['description']); ?>">
+                        <input type="text" class="form-control main-text" id="description" name="description" value="<?php if($postData) {
+                            echo strip_tags($postData['description']);
+                        } ?>">
                         <?php if (!empty($errors['description'])): ?>
                             <span class="error main-text text-brown font-semibold"><?= $errors['description']?></span>
                         <?php endif; ?>
@@ -33,7 +38,9 @@
 
                 <div class="mb-3 main-text space-y-2 flex flex-col">
                     <label for="content" class="form-label">Contenu de l'article</label>
-                    <textarea class="form-control" id="content" name="content" rows="5"><?php if($_POST) echo strip_tags($_POST['content']); ?></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="5"><?php if($postData) {
+                            echo strip_tags($postData['content']);
+                        } ?></textarea>
                     <?php if (!empty($errors['content'])): ?>
                         <span class="error main-text text-brown font-semibold"><?= $errors['content']?></span>
                     <?php endif; ?>
@@ -61,4 +68,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require ('layout.php');
+<?php require 'layout.php';

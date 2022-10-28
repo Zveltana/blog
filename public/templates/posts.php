@@ -51,7 +51,7 @@
                                             </div>
                                         </form>
 
-                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
+                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
                                             <form action="index.php?action=updatePost" method="post" class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour modifier l'article">
                                                     <button class="button-brown">Modifier l'article</button>
@@ -132,7 +132,7 @@
                                             </div>
                                         </form>
 
-                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
+                                        <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
                                             <form action="index.php?action=updatePost" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour modifier l'article">
                                                     <button class="button-blue">Modifier l'article</button>
@@ -179,4 +179,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require ('layout.php');
+<?php require 'layout.php';

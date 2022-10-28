@@ -8,17 +8,19 @@ class DeleteComment
 {
     public function execute(): void
     {
-            $container = new Container();
-            $container->userRepository();
-            $container->postRepository();
-            $post = $container->postRepository()->getPosts();
-            $container->commentRepository();
-            $comments = $container->commentRepository()->getComments();
+        $get = $_GET;
+
+        $container = new Container();
+        $container->userRepository();
+        $container->postRepository();
+        $post = $container->postRepository()->getPosts();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
 
 
-            $container->commentRepository()->deleteComment($_GET['id']);
+        $container->commentRepository()->deleteComment($get['id']);
 
-            $container->redirection()->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }
 

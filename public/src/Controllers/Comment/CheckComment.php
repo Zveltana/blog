@@ -7,16 +7,17 @@ use Application\Common\Container;
 class CheckComment
 {
     function execute() {
+        $get = $_GET;
+
         $container = new Container();
         $container->userRepository();
         $container->postRepository();
-        $post = $container->postRepository()->getPosts();
         $container->commentRepository();
         $comments = $container->commentRepository()->getComments();
         $container->redirection();
 
 
-        $container->commentRepository()->checkComment($_GET['id']);
+        $container->commentRepository()->checkComment($get['id']);
 
         $container->redirection()->execute('index.php?action=dashboard');
     }

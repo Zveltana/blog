@@ -48,13 +48,13 @@ class CategoryRepository
         return $category;
     }
 
-    public function getCategoryById(int $id): ?Category
+    public function getCategoryById(int $identifier): ?Category
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, name FROM categories WHERE id = :id"
         );
 
-        $statement->execute(['id' => $id]);
+        $statement->execute(['id' => $identifier]);
 
         $row = $statement->fetch();
         if ($row === false) {

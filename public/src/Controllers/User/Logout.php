@@ -16,6 +16,6 @@ class Logout {
             -1
         );
 
-        $container->redirection()->execute($_SERVER['HTTP_REFERER']);
+        $container->redirection()->execute('index.php');
     }
 }

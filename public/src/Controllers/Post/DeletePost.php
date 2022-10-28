@@ -9,28 +9,29 @@ class DeletePost
 {
     public function execute(): void
     {
+        $postData = $_POST;
+        $session = $_SESSION;
+
         $container = new Container();
 
         $container->postRepository();
         $container->userRepository();
         $container->commentRepository();
 
-        if(isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
+        if($postData['token'] && $postData['token'] === $session['token']) {
 
+            $post = $container->postRepository()->getPostById($postData['identifier']);
 
-            $post = $container->postRepository()->getPostById($_POST['identifier']);
-
-            $container->commentRepository()->deleteCommentByPost($_POST['identifier']);
-            $container->postRepository()->deletePost($_POST['identifier']);
+            $container->commentRepository()->deleteCommentByPost($postData['identifier']);
+            $container->postRepository()->deletePost($postData['identifier']);
 
             if (file_exists($post->picture)) {
                 unlink($post->picture);
             }
 
             $container->redirection()->execute('index.php?action=posts');
-        } else {
-            throw new Exception('Jeton de sécurité périmé');
         }
+        throw new Exception('Jeton de sécurité périmé');
     }
 }
 

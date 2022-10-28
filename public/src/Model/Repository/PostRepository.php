@@ -61,13 +61,13 @@ class PostRepository
         return $post;
     }
 
-    public function getPostById(int $id): ?Post
+    public function getPostById(int $identifier): ?Post
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, title, description, content, picture, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, category_id, user_id FROM posts WHERE id = :id"
         );
 
-        $statement->execute(['id' => $id]);
+        $statement->execute(['id' => $identifier]);
 
         $row = $statement->fetch();
         if ($row === false) {
