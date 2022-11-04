@@ -1,6 +1,7 @@
-<?php $title = 'Update Post'; ?>
+<?php $title = 'Update Article'; ?>
 
 <?php ob_start();?>
+    <?php $session = $_SESSION; ?>
     <section class="width height">
         <h1 class="title mb-20">Modification du commentaire : <?= $post->title ?></h1>
 
@@ -39,7 +40,11 @@
                     <input type="file" id="picture" class="form-control" name="picture" value="<?= $post->picture ?>">
                 </div>
 
-                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                <?php if (!empty($message['verify_picture'])): ?>
+                    <span class="error main-text text-brown font-semibold"><?= $message['verify_picture']?></span>
+                <?php endif; ?>
+
+                <input type="hidden" name="token" value="<?= $session['token'] ?>">
 
                 <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
 
@@ -54,4 +59,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require ('layout.php');
+<?php require 'layout.php';

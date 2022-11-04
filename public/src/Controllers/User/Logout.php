@@ -2,19 +2,14 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\Redirect;
+use Application\Common\Container;
 
 class Logout {
     public function execute(){
-        $redirection = new Redirect();
+        $container = new Container();
+
         session_destroy();
 
-        setcookie(
-            'LOGGED_USER',
-            null,
-            -1
-        );
-
-        $redirection->execute('index.php');
+        $container->redirection()->execute('index.php');
     }
 }

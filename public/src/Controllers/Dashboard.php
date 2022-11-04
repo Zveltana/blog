@@ -2,25 +2,22 @@
 
 namespace Application\Controllers;
 
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\CommentRepository;
-use Application\Model\Repository\PostRepository;
-use Application\Model\Repository\UsersRepository;
+use Application\Common\Container;
 
 class Dashboard
 {
-    function execute()
+    function execute(): void
     {
-        $connection = new DatabaseConnection();
+        $container = new Container();
 
-        $usersRepository = new UsersRepository($connection);
-        $users = $usersRepository->getUsers();
+        $container->userRepository();
+        $users = $container->userRepository()->getUsers();
 
-        $postRepository = new PostRepository($connection);
-        $posts = $postRepository->getPosts();
+        $container->postRepository();
+        $posts = $container->postRepository()->getPosts();
 
-        $commentRepository = new CommentRepository($connection, $usersRepository, $postRepository);
-        $comments = $commentRepository->getComments();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
 
         require('templates/dashboard.php');
     }

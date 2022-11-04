@@ -2,28 +2,25 @@
 
 namespace Application\Controllers\Comment;
 
-use Application\Lib\Redirect;
-use Application\Model\Repository\CommentRepository;
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\PostRepository;
-use Application\Model\Repository\UsersRepository;
+use Application\Common\Container;
 
 class DeleteComment
 {
     public function execute(): void
     {
-            $connection = new DatabaseConnection();
-            $usersRepository = new UsersRepository($connection);
-            $postRepository = new PostRepository($connection);
-            $post = $postRepository->getPosts();
-            $commentRepository = new CommentRepository($connection, $usersRepository, $postRepository);
-            $comments = $commentRepository->getComments();
-            $redirection = new Redirect();
+        $get = $_GET;
+
+        $container = new Container();
+        $container->userRepository();
+        $container->postRepository();
+        $post = $container->postRepository()->getPosts();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
 
 
-            $commentRepository->deleteComment($_GET['id']);
+        $container->commentRepository()->deleteComment($get['id']);
 
-            $redirection->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }
 

@@ -2,49 +2,50 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\UsersRepository;
-use Application\Lib\Redirect;
-use Application\Model\User;
+use Application\Common\Container;
 
 class Login
 {
     public function execute(): void
     {
-        if(isset($_SESSION['LOGGED_USER'])){
-            $redirection = new Redirect();
-            $redirection->execute('index.php');
-        }
+        $session = $_SESSION;
 
-        $connection = new DatabaseConnection();
-        $usersRepository = new UsersRepository($connection);
+        $container = new Container();
+        $container->userRepository();
 
         $errors = [];
+
+        if(isset($session['LOGGED_USER'])){
+            $container->redirection()->execute('index.php');
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
 
-            if (empty($postData['email'])) {
-                $errors['email'] = 'Veuillez remplir ce champ.';
-            }
+            $fields = [
+                'email',
+                'password',
+            ];
 
-            if (empty($postData['password'])) {
-                $errors['password'] = 'Veuillez remplir ce champ.';
+            foreach ($fields as $field)
+            {
+                if (empty($postData[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
+                }
             }
 
             if (count($errors) === 0) {
-                $user = $usersRepository->getUserByEmail($postData['email']);
+                $user = $container->userRepository()->getUserByEmail($postData['email']);
 
                 $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier !');
 
                 if ($user !== null && password_verify($postData['password'], $user->getPassword()) === true) {
-                    $redirection = new Redirect();
                     $_SESSION['LOGGED_USER'] = $user->getFullName();
                     $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
                     $_SESSION['LOGGED_USER_IS_ADMIN'] = $user->getIsAdmin();
 
 
-                    $redirection->execute('index.php');
+                    $container->redirection()->execute('index.php');
                 }
             }
         }

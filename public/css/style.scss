@@ -94,14 +94,15 @@
 }
 
 .underline {
-  text-decoration: underline #A68C7C;
+  text-decoration: underline #a68c7c;
   text-underline-position: under;
 }
 
-input, textarea {
+input,
+textarea {
   @apply bg-brown rounded-md border-b-2 border-b-green-500 p-2 text-white;
 }
 
 input::placeholder {
-   @apply text-brown-500;
+  @apply text-brown-500;
 }

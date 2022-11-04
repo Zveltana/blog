@@ -2,9 +2,7 @@
 
 namespace Application\Controllers;
 
-use Application\Lib\Redirect;
-
-class submitContact
+class SubmitContact
 {
     public function execute(): void {
         require('templates/submitContact.php');

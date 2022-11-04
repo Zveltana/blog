@@ -57,13 +57,13 @@ class UsersRepository
         return $user;
     }
 
-    public function getUserById(int $id): ?User
+    public function getUserById(int $identifier): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT * FROM users WHERE id = :id"
         );
 
-        $statement->execute(['id' => $id]);
+        $statement->execute(['id' => $identifier]);
 
         $row = $statement->fetch();
         if ($row === false) {

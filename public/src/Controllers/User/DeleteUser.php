@@ -2,26 +2,22 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\Redirect;
-use Application\Model\Repository\CommentRepository;
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\PostRepository;
-use Application\Model\Repository\UsersRepository;
+use Application\Common\Container;
 
 class DeleteUser
 {
     public function execute(): void
     {
-        $connection = new DatabaseConnection();
-        $usersRepository = new UsersRepository($connection);
+        $get = $_GET;
+        $container = new Container();
+        $container->userRepository();
 
-        $user = $usersRepository->getUsers();
-        $redirection = new Redirect();
+        $user = $container->userRepository()->getUsers();
 
 
-        $usersRepository->deleteUser($_GET['id']);
+        $container->userRepository()->deleteUser($get['id']);
 
-        $redirection->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }
 

@@ -2,26 +2,23 @@
 
 namespace Application\Controllers\Comment;
 
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\CommentRepository;
-use Application\Model\Repository\PostRepository;
-use Application\Model\Repository\UsersRepository;
-use Application\Lib\Redirect;
+use Application\Common\Container;
 
 class CheckComment
 {
     function execute() {
-        $connection = new DatabaseConnection();
-        $usersRepository = new UsersRepository($connection);
-        $postRepository = new PostRepository($connection);
-        $post = $postRepository->getPosts();
-        $commentRepository = new CommentRepository($connection, $usersRepository, $postRepository);
-        $comments = $commentRepository->getComments();
-        $redirection = new Redirect();
+        $get = $_GET;
+
+        $container = new Container();
+        $container->userRepository();
+        $container->postRepository();
+        $container->commentRepository();
+        $comments = $container->commentRepository()->getComments();
+        $container->redirection();
 
 
-        $commentRepository->checkComment($_GET['id']);
+        $container->commentRepository()->checkComment($get['id']);
 
-        $redirection->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }

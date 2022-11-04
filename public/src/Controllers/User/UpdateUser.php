@@ -2,25 +2,24 @@
 
 namespace Application\Controllers\User;
 
-use Application\Lib\DatabaseConnection;
-use Application\Model\Repository\UsersRepository;
-use Application\Lib\Redirect;
+use Application\Common\Container;
 
 class UpdateUser
 {
     function execute() {
         $postData = $_POST;
-        $connection = new DatabaseConnection();
-        $usersRepository = new UsersRepository($connection);
-        $users = $usersRepository->getUsers();
+        $get = $_GET;
+
+        $container = new Container();
+        $container->userRepository();
+        $users = $container->userRepository()->getUsers();
 
         if ($postData['status']) {
-            $user = $usersRepository->getUserById($_GET['id']);
+            $user = $container->userRepository()->getUserById($get['id']);
             $user->setIsAdmin(true);
-            $usersRepository->updateUser($user);
+            $container->userRepository()->updateUser($user);
 
         }
-        $redirection = new Redirect();
-        $redirection->execute('index.php?action=dashboard');
+        $container->redirection()->execute('index.php?action=dashboard');
     }
 }

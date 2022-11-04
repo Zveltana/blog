@@ -1,12 +1,11 @@
 <?php
 
-namespace Application\Lib;
+namespace Application\Common;
 
 class Redirect
 {
     function execute(string $url)
     {
         header('location: ' . $url);
-        exit;
     }
 }

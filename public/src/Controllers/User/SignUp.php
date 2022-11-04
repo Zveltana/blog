@@ -1,63 +1,65 @@
 <?php
 namespace Application\Controllers\User;
 
-use Application\Lib\DatabaseConnection;
-use Application\Lib\Redirect;
-use Application\Model\Repository\UsersRepository;
+use Application\Common\Container;
 use Application\Model\User;
 
 class SignUp
 {
     public function execute(): void
     {
-        if(isset($_SESSION['loggedUser'])){
-            $redirection = new Redirect();
-            $redirection->execute('index.php');
-        }
+        $session = $_SESSION;
+        $server = $_SERVER;
 
-        $connection = new DatabaseConnection();
-
-        $usersRepository = new UsersRepository($connection);
+        $container = new Container();
+        $container->userRepository();
 
         $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if(isset($session['loggedUser'])){
+            $container->redirection()->execute('index.php');
+        }
+
+        if ($server['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
 
-            if (empty($postData['fullName'])) {
-                $errors['fullName'] = 'Veuillez remplir ce champ.';
-            }
+            $fields = [
+                'fullName',
+                'email',
+                'password',
+            ];
 
-            if (empty($postData['email'])) {
-                $errors['email'] = 'Veuillez remplir ce champ.';
+            foreach ($fields as $field)
+            {
+                if (empty($postData[$field])) {
+                    $errors[$field] = 'Veuillez remplir ce champ.';
+                }
             }
 
             if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
                 $errors['incorrect-email'] = 'Email incorrect.';
             }
 
-            if (empty($postData['password'])) {
-                $errors['password'] = 'Veuillez remplir ce champ.';
-            }
-
-            $user = $usersRepository->getUserByEmail($postData['email']);
+            $user = $container->userRepository()->getUserByEmail($postData['email']);
 
             if ($user !== null){
                 $errorMessage = sprintf('L\'email inscrit existe déjà.');
             }
 
             if (count($errors) === 0 && $user === null) {
-                $redirection = new Redirect();
                 $user = new User();
                 $user->setFullName(strip_tags($postData['fullName']));
                 $user->setEmail($postData['email']);
                 $user->setPassword($postData['password']);
-                $createUser = $usersRepository->createUser($user);
+                $createUser = $container->userRepository()->createUser($user);
+                $user = $container->userRepository()->getUserByEmail($postData['email']);
+
 
                 $_SESSION['LOGGED_USER'] = strip_tags($postData['fullName']);
+                $_SESSION['LOGGED_USER_ID'] = $user->getIdentifier();
                 $_SESSION['LOGGED_USER_IS_ADMIN'] = false;
 
-                $redirection->execute('index.php');
+                $container->redirection()->execute('index.php');
             }
         }
 

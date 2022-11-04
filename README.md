@@ -18,7 +18,7 @@ For the project to work well on your machine you need to do :
 - `npm install` to use nodes modules
 - `composer install` to generate a composer.json file
 
-Create your database with the `blog_php.sql` at the `.essentials` folder at the root of the project. To connect to your database you go to `public/src/lib/config.php`, once in the file you will see this :
+Create your database with the `blog_php.sql` at the `.essentials` folder at the root of the project. To connect to your database you go to `public/src/Common/config.php`, once in the file you will see this :
 
 ```php
 <?php
