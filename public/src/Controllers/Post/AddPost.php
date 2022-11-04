@@ -45,16 +45,17 @@ class AddPost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === array()) {
+                if ($picture === false) {
                     $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
                 } else {
+                    $upload = $container->pictureVerifier()->upload();
                     $title = strip_tags($postData['title']);
                     $author = $session['LOGGED_USER_ID'];
                     $description = strip_tags($postData['description']);
                     $content = strip_tags($postData['content']);
                     $category = $get['id'];
 
-                    $posts->createPost($title, $author, $description, $content, $picture, $category);
+                    $posts->createPost($title, $author, $description, $content, $upload, $category);
 
                     $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
                     $container->redirection()->execute('index.php?action=posts');

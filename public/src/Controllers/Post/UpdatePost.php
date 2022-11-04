@@ -28,13 +28,15 @@ class UpdatePost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === array()) {
-                    $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
+                if ($picture === false) {
+                    $message['verify_picture'] = 'Votre image n\'est pas conforme';
                 } else {
+                    $upload = $container->pictureVerifier()->upload();
+
                     if (file_exists($post->picture)) {
                         unlink($post->picture);
                     }
-                    $post->picture = $picture;
+                    $post->picture = true;
 
                     $container->postRepository()->updatePost($post);
                     $container->redirection()->execute('index.php?action=posts');
