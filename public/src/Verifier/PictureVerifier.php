@@ -16,11 +16,10 @@ class PictureVerifier
 
         if (isset($picture) && $picture['error'] === 0 && $picture['size'] <= 1000000) {
             $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'svg'];
-            if (in_array($extension, $allowedExtensions, true)) {
-                move_uploaded_file($picture['tmp_name'], $move);
-            } else {
+            if (!in_array($extension, $allowedExtensions, true)) {
                 return $message;
             }
+            move_uploaded_file($picture['tmp_name'], $move);
         }
 
         return $move;

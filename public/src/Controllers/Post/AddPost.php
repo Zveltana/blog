@@ -45,9 +45,7 @@ class AddPost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === array()) {
-                    $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
-                } else {
+                if ($picture !== array()) {
                     $title = strip_tags($postData['title']);
                     $author = $session['LOGGED_USER_ID'];
                     $description = strip_tags($postData['description']);
@@ -59,7 +57,10 @@ class AddPost
                     $message = sprintf('Votre commentaire est en attente de validation par un administrateur');
                     $container->redirection()->execute('index.php?action=posts');
                 }
-            }
+
+                $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
+
+                }
         }
         require('templates/addPost.php');
     }

@@ -7,7 +7,7 @@ use Exception;
 
 class UpdatePost
 {
-    function execute(): void
+    public function execute(): void
     {
         $postData = $_POST;
         $files = $_FILES;
@@ -28,17 +28,19 @@ class UpdatePost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === array()) {
-                    $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
-                } else {
+                if ($picture !== array()) {
                     if (file_exists($post->picture)) {
                         unlink($post->picture);
                     }
+
                     $post->picture = $picture;
 
                     $container->postRepository()->updatePost($post);
                     $container->redirection()->execute('index.php?action=posts');
                 }
+
+                $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
+
             }
 
             $errorMessage = sprintf('Aucune modification effectuée !');
