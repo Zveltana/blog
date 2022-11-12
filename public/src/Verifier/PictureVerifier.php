@@ -4,44 +4,32 @@ namespace Application\Verifier;
 
 class PictureVerifier
 {
-    public function verify(bool $required = true): bool
+    public function verify(bool $required = true): bool|array
     {
+        $message = [];
         $picture = $_FILES['picture'];
 
-        if($required && file_exists($picture['name']))
+        if($required && !file_exists($picture['tmp_name']))
         {
-            var_dump('weth');
             return false;
         }
 
-        if($required && !file_exists($picture['name']))
+        if(!$required && !file_exists($picture['tmp_name']))
         {
-            var_dump('salut');
-            return false;
-        }
-
-        if(!$required && file_exists($picture['name']))
-        {
-            var_dump('couocu');
             return true;
         }
 
-        if($required && file_exists($picture['name']))
+        if(file_exists($picture['tmp_name']) && $picture['error'] === 0 && $picture['size'] <= 1000000)
         {
-            var_dump('yo');
-            $tmpname = $picture['tmp_name'];
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mtype = finfo_file($finfo, $tmpname);
+            $mtype = mime_content_type($picture['tmp_name']);
 
             if(str_starts_with($mtype, 'image/'))
             {
                 return true;
             }
-
-            return false;
         }
 
-        return false;
+        return $message;
 
 
 

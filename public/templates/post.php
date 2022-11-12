@@ -34,7 +34,6 @@ ob_start(); ?>
                     <p class="main-text <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?>"><?= nl2br($comment->comment) ?></p>
 
                     <p><strong>Ecrit par : <?= $comment->author->getFullName() ?></strong> le <?= $comment->frenchCreationDate ?>
-                        <?php if(isset($_SESSION['LOGGED_USER'])):?>(<a href="index.php?action=editComment&id=<?= $comment->identifier?>" class="<?php if($category->name === 'PHP'): ?>text-brown-500 hover:text-green-500<?php else: ?>text-blue-500 hover:text-brown-500<?php endif;?>">modifier</a>)</p><?php endif; ?>
                 </div>
 
                 <hr class="<?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> border-2 my-5">
@@ -43,7 +42,7 @@ ob_start(); ?>
     </div>
 
     <?php if(isset($_SESSION['LOGGED_USER'])):?>
-    <form action="index.php?action=post" method="post" class="bg-white space-y-5 border-solid border-4 <?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> rounded-2xl">
+    <form action="index.php?action=post&id=<?= $post->identifier ?>" method="post" class="bg-white space-y-5 border-solid border-4 <?php if($category->name === 'PHP'): ?>border-brown<?php else: ?>border-blue<?php endif;?> rounded-2xl">
         <div class="height width">
             <p class="subtitle <?php if($category->name === 'PHP'): ?>text-brown-500<?php else: ?>text-blue-500<?php endif;?> mb-10">Ajouter un commentaire</p>
 

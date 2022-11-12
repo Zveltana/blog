@@ -45,7 +45,7 @@ class AddPost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === false) {
+                if ($picture === array()) {
                     $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
                 } else {
                     $upload = $container->pictureVerifier()->upload();
