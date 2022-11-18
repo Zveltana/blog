@@ -41,8 +41,8 @@ try {
         if (array_key_exists($get['action'], $array)) {
             (new $array[$get['action']])->execute();
         } elseif ($get['action'] === 'post') {
-            if (isset($_POST['identifier']) && $_POST['identifier'] > 0) {
-                $identifier = $_POST['identifier'];
+            if (isset($get['id']) && $get['id'] > 0) {
+                $identifier = $get['id'];
 
                 (new Post())->execute($identifier);
             } else {
@@ -53,7 +53,9 @@ try {
         } elseif ($get['action'] === 'addPost' && isset($_SESSION['LOGGED_USER'])) {
             (new AddPost())->execute();
         } elseif ($get['action'] === 'updatePost' && isset($_SESSION['LOGGED_USER'])) {
-            $post = $container->postRepository()->getPost($_POST['identifier']);
+            $identifier = $get['id'];
+
+            $post = $container->postRepository()->getPost($identifier);
 
             if($_SESSION['LOGGED_USER_ID'] === $post->author) {
                 (new UpdatePost())->execute();

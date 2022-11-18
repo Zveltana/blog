@@ -43,36 +43,27 @@
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <form action="index.php?action=post" method="post" class="flex justify-center">
+                                        <a href="index.php?action=post&id=<?= $post->identifier ?>" class="flex justify-center">
                                             <div class="button-b" title="Cliquez ici pour découvrir l'article">
                                                 <button class="button-brown">Lire l'article</button>
-
-                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </form>
+                                        </a>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
+                                            <a href="index.php?action=updatePost&id=<?= $post->identifier ?>" class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour modifier l'article">
                                                     <button class="button-brown">Modifier l'article</button>
-
-                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
-                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
-                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
-                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
-
-                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
-                                            </form>
+                                            </a>
 
                                             <form action="index.php?action=deletePost" method="post" class="flex justify-center">
                                                 <div class="button-b" title="Cliquez ici pour supprimer l'article">
                                                     <button class="button-brown">Supprimer l'article</button>
-
-                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
-
-                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
+
+                                                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
+                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </form>
                                         <?php endif; ?>
                                     </div>
@@ -124,29 +115,20 @@
 
                                         <p class="main-text"><?= htmlspecialchars($post->description)?></p>
 
-                                        <form action="index.php?action=post" method="post" class="flex justify-center">
+                                        <a href="index.php?action=post&id=<?= $post->identifier ?>" class="flex justify-center">
                                             <div class="button-bl" title="Cliquez ici pour découvrir l'article">
                                                 <button class="button-blue">Lire l'article</button>
-
-                                                <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                             </div>
-                                        </form>
+                                        </a>
 
                                         <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER_IS_ADMIN'] && $_SESSION['LOGGED_USER_ID'] === $post->author): ?>
-                                            <form action="index.php?action=updatePost" method="post" class="flex justify-center">
+                                            <a href="index.php?action=updatePost&id=<?= $post->identifier ?>" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour modifier l'article">
                                                     <button class="button-blue">Modifier l'article</button>
-
-                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
-                                                    <input type="hidden" name="title" value="<?= $post->title ?>">
-                                                    <input type="hidden" name="description" value="<?= $post->description ?>">
-                                                    <input type="hidden" name="content" value="<?= $post->content ?>">
-
-                                                    <input type="hidden" name="identifier" value="<?= $post->identifier ?>">
                                                 </div>
-                                            </form>
+                                            </a>
 
-                                            <form action="index.php?action=deletePost" method="post" class="flex justify-center">
+                                            <form action="index.php?action=deletePost&id=<?= $post->identifier ?>" method="post" class="flex justify-center">
                                                 <div class="button-bl" title="Cliquez ici pour supprimer l'article">
                                                     <button class="button-blue">Supprimer l'article</button>
 
