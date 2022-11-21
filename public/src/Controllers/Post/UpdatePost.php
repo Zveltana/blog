@@ -3,6 +3,7 @@
 namespace Application\Controllers\Post;
 
 use Application\Common\Container;
+use Application\Verifier\PictureVerifier;
 use Exception;
 
 class UpdatePost
@@ -40,7 +41,7 @@ class UpdatePost
                     }
                 }
 
-                if ($postData['title'] === $post->title && $postData['description'] && $post->description && $postData['content'] === $post->content && $picture === false)
+                if ($postData['title'] === $post->title && $postData['description'] && $post->description && $postData['content'] === $post->content && $picture === PictureVerifier::NOTHING)
                 {
                     $errors['nothing']= 'Rien n\'a été modifié !';
                 }
@@ -61,7 +62,7 @@ class UpdatePost
                         $post->picture = $upload;
                     }
 
-                    if($picture !== array()) {
+                    if($picture !== PictureVerifier::NOT_VALID) {
                         $container->postRepository()->updatePost($post);
                         $container->redirection()->execute('index.php?action=posts');
                     }

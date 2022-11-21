@@ -4,19 +4,22 @@ namespace Application\Verifier;
 
 class PictureVerifier
 {
-    public function verify(bool $required = true): bool|array
+    public const NOT_VALID = 0;
+    public const VALID = 1;
+    public const NOTHING = 2;
+
+    public function verify(bool $required = true): int
     {
-        $message = [];
         $picture = $_FILES['picture'];
 
         if($required && !file_exists($picture['tmp_name']))
         {
-            return false;
+            return self::NOTHING;
         }
 
         if(!$required && !file_exists($picture['tmp_name']))
         {
-            return true;
+            return self::VALID;
         }
 
         if(file_exists($picture['tmp_name']) && $picture['error'] === 0 && $picture['size'] <= 1000000)
@@ -25,31 +28,11 @@ class PictureVerifier
 
             if(str_starts_with($mtype, 'image/'))
             {
-                return true;
+                return self::VALID;
             }
         }
 
-        return $message;
-
-
-
-        /*$picture = $_FILES['picture'];
-        $message = [];
-
-        $fileInfo = pathinfo($picture['name']);
-        $extension = $fileInfo['extension'];
-
-        $move = sprintf("img/blog/%s.%s", md5(basename($picture['name'])), $extension);
-
-        if (isset($picture) && $picture['error'] === 0 && $picture['size'] <= 1000000) {
-            $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'svg'];
-            if (!in_array($extension, $allowedExtensions, true)) {
-                return $message;
-            }
-            move_uploaded_file($picture['tmp_name'], $move);
-        }
-
-        return $move;*/
+        return self::NOT_VALID;
     }
 
     public function upload(): string
