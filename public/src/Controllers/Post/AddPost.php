@@ -3,6 +3,7 @@
 namespace Application\Controllers\Post;
 
 use Application\Common\Container;
+use Application\Verifier\PictureVerifier;
 
 class AddPost
 {
@@ -44,7 +45,7 @@ class AddPost
 
                 $picture = $container->pictureVerifier()->verify();
 
-                if ($picture === array()) {
+                if ($picture === PictureVerifier::NOT_VALID) {
                     $message['verify_picture'] = 'Votre image n\'est pas conforme (format autorisé, gif, png, jpg, jpeg, svg).';
                 } else {
                     $upload = $container->pictureVerifier()->upload();
