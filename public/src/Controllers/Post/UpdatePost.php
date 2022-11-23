@@ -41,8 +41,6 @@ class UpdatePost
                     }
                 }
 
-                PictureVerifier::NOT_VALID;
-
                 if ($postData['title'] === $post->title && $postData['description'] && $post->description && $postData['content'] === $post->content && $picture === PictureVerifier::NOTHING)
                 {
                     $errors['nothing']= 'Rien n\'a été modifié !';
