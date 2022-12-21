@@ -18,6 +18,7 @@ build:
 hooks:
   # Run the script defined in package.json
   build: |
+    cd public
     npm install
     composer install
     npm run build-css
