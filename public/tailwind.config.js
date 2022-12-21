@@ -2,7 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./public/**/*.php"],
+  content: ["./**/*.php"],
   theme: {
     extend: {
       colors: {
@@ -34,10 +34,10 @@ module.exports = {
         '7xl': '5rem',
       },
       backgroundImage: {
-        blob: "url('./img/blob.svg')",
-        "blob-blue": "url('./img/blob-blue.svg')",
-        "blob-brown": "url('./img/blob-brown.svg')",
-        marbre : "url('./img/marbre.jpg')",
+        blob: "url('../img/blob.svg')",
+        "blob-blue": "url('../img/blob-blue.svg')",
+        "blob-brown": "url('../img/blob-brown.svg')",
+        marbre : "url('../img/marbre.jpg')",
       },
       gridTemplateColumns: {
         blog: "repeat(auto-fit, minmax(11rem, 1fr))",
