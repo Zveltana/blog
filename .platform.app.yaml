@@ -12,9 +12,14 @@ dependencies:
   nodejs:
     sass: "^1.47.0"
 
+build:
+  flavor: none
+
 hooks:
   # Run the script defined in package.json
   build: |
+    npm install
+    composer install
     npm run build-css
 
 # The size of the persistent disk of the application (in MB)
