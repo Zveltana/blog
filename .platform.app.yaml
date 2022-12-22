@@ -9,11 +9,12 @@ type: 'php:8.1'
 dependencies:
   php:
     composer/composer: '^2'
-  nodejs:
-    sass: "^1.47.0"
 
 build:
   flavor: none
+
+relationships:
+  database: "db:mysql"
 
 hooks:
   # Run the script defined in package.json
