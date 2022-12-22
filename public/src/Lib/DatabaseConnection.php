@@ -15,7 +15,7 @@ class DatabaseConnection
 
         $credentials = $config->credentials('database');
 
-        if($this->database === null){
+        if ($this->database === null) {
             $this->database = new \PDO('mysql:dbname='.$credentials['path'].';host='.$credentials['host'].';port='.$credentials['port'], $credentials['username'], $credentials['password']);
         }
 
