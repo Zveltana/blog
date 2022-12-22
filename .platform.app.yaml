@@ -13,9 +13,6 @@ dependencies:
 build:
   flavor: none
 
-relationships:
-  database: "db:mysql"
-
 hooks:
   # Run the script defined in package.json
   build: |
