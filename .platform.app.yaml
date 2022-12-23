@@ -14,7 +14,7 @@ build:
   flavor: none
 
 relationships:
-  database: "db2:mysql"
+  database: "db:mysql"
 
 hooks:
   # Run the script defined in package.json
