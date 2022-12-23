@@ -25,7 +25,7 @@ hooks:
     npm run build-css
 
 # The size of the persistent disk of the application (in MB)
-disk: 2048
+disk: 256
 
 # Your app's configuration when it's exposed to the web.
 web:

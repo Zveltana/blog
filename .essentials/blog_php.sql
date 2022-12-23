@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 27, 2022 at 02:32 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Hôte : localhost
+-- Généré le : jeu. 22 déc. 2022 à 17:54
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `blog_php`
+-- Base de données : `blog_php`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -33,7 +33,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Déchargement des données de la table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Structure de la table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -56,17 +56,21 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comments`
+-- Déchargement des données de la table `comments`
 --
 
 INSERT INTO `comments` (`id`, `comment`, `comment_date`, `user_id`, `post_id`, `is_enabled`) VALUES
-(1, 'Vraiment très interessant. Cet article m\'a permis de découvrir le PHP dans les grandes lignes.', '2022-10-24 17:29:10', 3, 1, 1),
-(2, 'Je découvre le JS dans cet article. Je ne connaissais pas du tout ce langage et je trouve cet article très instructif.', '2022-10-24 17:29:48', 3, 2, 1);
+(1, 'Je découvre le PHP dans cet article. Je ne connaissais pas du tout ce langage et je trouve cet article très instructif.', '2022-11-18 13:24:53', 3, 1, 1),
+(2, 'Je découvre le JS dans cet article. Je ne connaissais pas du tout ce langage et je trouve cet article très instructif.', '2022-11-18 13:25:06', 3, 2, 1),
+(3, 'Cet article contient des informations importantes pour l\'évolution d\'un développeur junior tel que moi, merci pour ce partage de connaissance !', '2022-11-18 13:28:06', 2, 1, 1),
+(4, 'Je n\'ai malheureusement pas tout compris sur la partie HTTP :/', '2022-11-18 13:28:38', 2, 1, 0),
+(5, 'Le JS est un monde nouveau pour moi, décourvir JS à travers cet article m\'a permis de me rendre compte que ce langage m\'était familier.', '2022-11-18 13:29:50', 1, 2, 1),
+(6, 'Très bon article', '2022-12-09 15:14:17', 3, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Structure de la table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -81,17 +85,17 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `posts`
+-- Déchargement des données de la table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `user_id`, `creation_date`, `picture`, `category_id`) VALUES
-(1, 'Le PHP dans son ensemble', 'Venez découvrir le PHP', 'PHP: Hypertext Preprocessor, plus connu sous son sigle PHP, est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP, mais pouvant également fonctionner comme n\'importe quel langage interprété de façon locale. PHP est un langage impératif orienté objet.', 1, '2022-10-25 16:57:28', 'img/blog/a1d6aa2915888338a41405fcd24f9166.png', 1),
-(2, 'Le JavaScript un monde nouveau', 'Vous ne connaissez pas le JS ? C\'est le moment pour vous de le découvrir', 'JavaScript est un langage de programmation de scripts principalement employé dans les pages web interactives et à ce titre est une partie essentielle des applications web. Avec les langages HTML et CSS, JavaScript est au cœur des langages utilisés par les développeurs web.', 2, '2022-10-24 17:28:11', 'img/blog/4d3589effac01f2dd5200fda12c4411f.png', 2);
+(1, 'Le PHP', 'Venez découvrir le PHP', 'PHP: Hypertext Preprocessor, plus connu sous son sigle PHP, est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP, mais pouvant également fonctionner comme n\'importe quel langage interprété de façon locale. PHP est un langage impératif orienté objet.', 1, '2022-11-18 14:32:29', 'img/blog/a1d6aa2915888338a41405fcd24f9166.png', 1),
+(2, 'Le JavaScript un monde nouveau', 'Vous ne connaissez pas le JS ? C\'est le moment pour vous de le découvrir', 'JavaScript est un langage de programmation de scripts principalement employé dans les pages web interactives et à ce titre est une partie essentielle des applications web. Avec les langages HTML et CSS, JavaScript est au cœur des langages utilisés par les développeurs web.', 2, '2022-11-18 13:13:10', 'img/blog/4d3589effac01f2dd5200fda12c4411f.png', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -103,26 +107,26 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `is_admin`) VALUES
-(1, 'Amélia MASSOT', 'ameliamassot@gmail.com', '$2y$10$HW.ZGgQPWq7vFW9MRx07Luiphy4aqt70SMA5rDMfGe0/nvvDkHKlK', 1),
-(2, 'Thomas BOILEAU', 'thomas-boileau@gmail.com', '$2y$10$ijdVhexBFKuPZJRJSAqWmO0s60kjukhlYsO8kQwFKZZ73zmbEZc7S', 1),
-(3, 'Bob Marley', 'bob-marley@gmail.com', '$2y$10$Em877UGP/5KRbq2tL63q3urMzlaPcMjuHZNUYXBNv08NgZNXtCli6', 0);
+(1, 'Admin', 'admin@gmail.com', '$2y$10$HW.ZGgQPWq7vFW9MRx07Luiphy4aqt70SMA5rDMfGe0/nvvDkHKlK', 1),
+(2, 'Admin2', 'admin2@gmail.com', '$2y$10$ijdVhexBFKuPZJRJSAqWmO0s60kjukhlYsO8kQwFKZZ73zmbEZc7S', 1),
+(3, 'User', 'user@gmail.com', '$2y$10$uHWgxy1K.d4JfsSndY8ncuO4ud9rKatq0v1Z/3pAZ7p5HH5DBCiDW', 1);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `categories`
+-- Index pour la table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comments`
+-- Index pour la table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -130,7 +134,7 @@ ALTER TABLE `comments`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `posts`
+-- Index pour la table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
@@ -138,53 +142,53 @@ ALTER TABLE `posts`
   ADD KEY `users_id` (`user_id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `comments`
+-- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `posts`
+-- Contraintes pour la table `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
